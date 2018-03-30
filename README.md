@@ -29,9 +29,9 @@ Installation
 
 6. Stop the containers:
 
-  ```````````````````
-  docker-compose stop
-  ```````````````````
+   ```````````````````
+   docker-compose stop
+   ```````````````````
 
 Open shell
 ----------

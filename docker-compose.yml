@@ -1,6 +1,7 @@
 version: "3.1"
 services:
   groupoffice:
+    container_name: groupoffice
     build:
       context: ./
       dockerfile: ./groupoffice.dockerfile
@@ -15,6 +16,7 @@ services:
       - ./etc/groupoffice:/etc/groupoffice
 
   db:
+    container_name: db
     image: mariadb
     restart: always
     volumes:
@@ -28,6 +30,7 @@ services:
       - "3306:3306"
 
   composer:
+    container_name: composer
     build:
        context: ./
        dockerfile: ./composer.dockerfile
@@ -36,6 +39,7 @@ services:
     working_dir: /var/www/html
     
   sass:
+    container_name: sass
     build:
        context: ./
        dockerfile: ./sass.dockerfile
@@ -43,3 +47,17 @@ services:
       - ./src/groupoffice/www:/var/www/html
     working_dir: /var/www/html
     
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    links: 
+     - db:db
+    environment:
+        MYSQL_USER: groupoffice
+        MYSQL_PASSWORD: groupoffice
+        MYSQL_ROOT_PASSWORD: groupoffice
+    restart: always
+    ports:
+     - 8080:80
+    volumes:
+     - /sessions  

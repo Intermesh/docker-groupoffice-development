@@ -35,7 +35,9 @@ Installation
 5. Install Group-Office by going to http://localhost/install.
    Note: Database name, username and password are all "groupoffice". Use "db" as hostname.
 
-6. Stop the containers:
+6. PhpMyAdmin runs on port 8080.
+
+7. Stop the containers:
 
    ```````````````````
    docker-compose stop

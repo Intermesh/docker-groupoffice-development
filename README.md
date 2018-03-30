@@ -8,19 +8,27 @@ Installation
 ------------
 
 1. Clone this repository:
-  ```
+
+  `````````````````````````````````````````````````````````````````````````
   git clone https://github.com/Intermesh/groupoffice-docker-development.git
-  ```
+  `````````````````````````````````````````````````````````````````````````
+
 2. Run the containers:
+
    ````````````````````
-  docker-compose up -d
-  ````````````````````
+   docker-compose up -d
+   ````````````````````
+
 4. Run php composer install once:
-  ```````````````````````````````````
-  docker-compose run composer install
-  ```````````````````````````````````
+
+   ```````````````````````````````````
+   docker-compose run composer install
+   ```````````````````````````````````
+
 5. Install Group-Office by going to http://localhost/install
+
 6. Stop the containers:
+
   ```````````````````
   docker-compose stop
   ```````````````````

@@ -11,16 +11,16 @@ services:
     links:
       - db
     volumes:
-      - ./src/groupoffice/www:/var/www/html
-      - ./data/files:/home/groupoffice
-      - ./etc/groupoffice:/etc/groupoffice
+      - ./src/groupoffice/www:/var/www/html:cached
+      - ./data/files:/home/groupoffice:cached
+      - ./etc/groupoffice:/etc/groupoffice:cached
 
   db:
     container_name: db
     image: mariadb
     restart: always
     volumes:
-      - ./data/mysql:/var/lib/mysql
+      - ./data/mysql:/var/lib/mysql:cached
     environment:
       MYSQL_ROOT_PASSWORD: groupoffice
       MYSQL_USER: groupoffice

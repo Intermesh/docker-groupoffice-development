@@ -34,3 +34,12 @@ services:
     volumes: 
       - ./src/groupoffice/www:/var/www/html
     working_dir: /var/www/html
+    
+  sass:
+    build:
+       context: ./
+       dockerfile: ./sass.dockerfile
+    volumes: 
+      - ./src/groupoffice/www:/var/www/html
+    working_dir: /var/www/html
+    

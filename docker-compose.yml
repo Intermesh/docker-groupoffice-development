@@ -1,0 +1,36 @@
+version: "3.1"
+services:
+  groupoffice:
+    build:
+      context: ./
+      dockerfile: ./groupoffice.dockerfile
+
+    ports:
+      - "80:80"
+    links:
+      - db
+    volumes:
+      - ./src/groupoffice/www:/var/www/html
+      - ./data/files:/home/groupoffice
+      - ./etc/groupoffice:/etc/groupoffice
+
+  db:
+    image: mariadb
+    restart: always
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: groupoffice
+      MYSQL_USER: groupoffice
+      MYSQL_PASSWORD: groupoffice
+      MYSQL_DATABASE: groupoffice
+    ports:
+      - "3306:3306"
+
+  composer:
+    build:
+       context: ./
+       dockerfile: ./composer.dockerfile
+    volumes: 
+      - ./src/groupoffice/www:/var/www/html
+    working_dir: /var/www/html

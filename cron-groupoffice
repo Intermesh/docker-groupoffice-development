@@ -1,0 +1,2 @@
+* * * * * www-data php /var/www/html/groupofficecli.php -r=core/cron/run -q > /dev/null
+0 0 * * * root /usr/bin/php /var/www/html/groupofficecli.php -r=log/log/rotate > /dev/null

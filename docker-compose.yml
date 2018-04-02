@@ -12,8 +12,8 @@ services:
     links:
       - db
     volumes:
-      - ./src/groupoffice/www:/var/www/html:cached
-      - ./data/files:/home/groupoffice:cached
+      - ./src/groupoffice/www:/usr/local/share/groupoffice:cached
+      - ./data/files:/srv/groupoffice:cached
       - ./etc/groupoffice:/etc/groupoffice:cached
 
   db:
@@ -29,6 +29,13 @@ services:
       MYSQL_DATABASE: groupoffice
     ports:
       - "8306:3306"
+      
+  mailserver:
+    container_name: mailserver
+    build:
+      context: ./mailserver
+    ports: 
+      - "8143:143"
 
   composer:
     container_name: composer

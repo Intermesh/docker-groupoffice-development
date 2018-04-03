@@ -1,5 +1,5 @@
 driver = mysql
-connect = "host={db_host} dbname={db_name} user={db_user} password={db_pass}"
+connect = "host={dbHost} dbname={dbName} user={dbUser} password={dbPass}"
 default_pass_scheme = CRYPT
 user_query = SELECT CONCAT('/home/vmail/',maildir) AS home, CONCAT('maildir:/home/vmail/',maildir) AS mail, 150 AS uid, 8 AS gid, CONCAT('*:storage=', quota) AS quota_rule FROM pa_mailboxes WHERE username = '%u' AND active = '1'
 password_query = SELECT username AS user, password, CONCAT('/home/vmail/',maildir) AS userdb_home, CONCAT('maildir:/home/vmail/', maildir) AS userdb_mail, 150 AS userdb_uid, 8 AS userdb_gid FROM pa_mailboxes WHERE username = '%u' AND active = '1'

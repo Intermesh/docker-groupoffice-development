@@ -4,9 +4,7 @@ services:
     image: intermesh/groupoffice
     container_name: groupoffice
     build:
-      context: ./
-      dockerfile: ./groupoffice.dockerfile
-
+      context: ./groupoffice
     ports:
       - "8000:80"
     links:
@@ -14,19 +12,16 @@ services:
     volumes:
       - ./src/groupoffice/www:/usr/local/share/groupoffice:cached
       - ./data/files:/srv/groupoffice:cached
-      - ./etc/groupoffice:/etc/groupoffice:cached
-
+    env_file:
+      - ./db.env
   db:
     container_name: db
     image: mariadb
     restart: always
     volumes:
       - ./data/mysql:/var/lib/mysql:cached
-    environment:
-      MYSQL_ROOT_PASSWORD: groupoffice
-      MYSQL_USER: groupoffice
-      MYSQL_PASSWORD: groupoffice
-      MYSQL_DATABASE: groupoffice
+    env_file:
+      - ./db.env
     ports:
       - "8306:3306"
       
@@ -36,6 +31,10 @@ services:
       context: ./mailserver
     ports: 
       - "8143:143"
+    env_file:
+      - ./db.env
+    environment:
+      POSTMASTER_EMAIL: postmaster@example.com
 
   composer:
     container_name: composer
@@ -60,10 +59,8 @@ services:
     container_name: phpmyadmin
     links: 
      - db:db
-    environment:
-        MYSQL_USER: groupoffice
-        MYSQL_PASSWORD: groupoffice
-        MYSQL_ROOT_PASSWORD: groupoffice
+    env_file:
+      - ./db.env
     restart: always
     ports:
      - 8001:80

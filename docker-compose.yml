@@ -10,7 +10,7 @@ services:
     links:
       - db
     volumes:
-      - ./src/groupoffice/www:/usr/local/share/groupoffice:cached
+      #- ./src/groupoffice/www:/usr/local/share/groupoffice:cached
       - ./data/files:/srv/groupoffice:cached
     env_file:
       - ./db.env
@@ -26,21 +26,26 @@ services:
       - "8306:3306"
       
   mailserver:
+    image: intermesh/mailserver
     container_name: mailserver
     build:
       context: ./mailserver
     ports: 
-      - "8143:143"
+      - "143:143"
+      - "4190:4190"
+      - "25:25"
+      - "587:587"
     env_file:
       - ./db.env
     environment:
       POSTMASTER_EMAIL: postmaster@example.com
-
+    volumes:
+      - ./data/vmail:/home/vmail:cached
+      
   composer:
     container_name: composer
     build:
-       context: ./
-       dockerfile: ./composer.dockerfile
+       context: ./composer
     volumes: 
       - ./src/groupoffice/www:/var/www/html
     working_dir: /var/www/html
@@ -48,8 +53,7 @@ services:
   sass:
     container_name: sass
     build:
-       context: ./
-       dockerfile: ./sass.dockerfile
+       context: ./sass       
     volumes: 
       - ./src/groupoffice/www:/var/www/html
     working_dir: /var/www/html

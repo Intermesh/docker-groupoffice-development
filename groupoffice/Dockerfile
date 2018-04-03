@@ -24,7 +24,6 @@ RUN sed -i 's/{dbName}/'$MYSQL_DATABASE'/' /etc/groupoffice/config.ini
 RUN sed -i 's/{dbUser}/'$MYSQL_PASSWORD'/' /etc/groupoffice/config.ini
 RUN sed -i 's/{dbPass}/'$MYSQL_USER'/' /etc/groupoffice/config.ini
 
-
 #Group-Office data:
 VOLUME /src/groupoffice
 

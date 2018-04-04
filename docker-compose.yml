@@ -10,7 +10,7 @@ services:
     links:
       - db
     volumes:
-      #- ./src/groupoffice/www:/usr/local/share/groupoffice:cached
+      - ./src/groupoffice/www:/usr/local/share/groupoffice:cached
       - ./data/files:/srv/groupoffice:cached
     env_file:
       - ./db.env

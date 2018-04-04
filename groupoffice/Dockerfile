@@ -10,8 +10,8 @@ EXPOSE 80
 EXPOSE 443
 
 RUN apt-get update && \
-    apt-get install -y libxml2-dev && \
-    docker-php-ext-install soap pdo pdo_mysql calendar
+    apt-get install -y libxml2-dev libpng-dev && \
+    docker-php-ext-install soap pdo pdo_mysql calendar gd
 
 #configure apache
 ADD ./etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf

@@ -40,7 +40,7 @@ services:
     environment:
       POSTMASTER_EMAIL: postmaster@example.com
     volumes:
-      - ./data/vmail:/home/vmail:cached
+      - ./data/vmail:/var/mail/vhosts:cached
       
   composer:
     container_name: composer

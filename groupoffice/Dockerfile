@@ -25,10 +25,17 @@ RUN sed -i 's/{dbUser}/'$MYSQL_PASSWORD'/' /etc/groupoffice/config.ini
 RUN sed -i 's/{dbPass}/'$MYSQL_USER'/' /etc/groupoffice/config.ini
 
 #Group-Office data:
-VOLUME /src/groupoffice
+VOLUME /var/lib/groupoffice
 
 #Group-Office sources
-VOLUME /usr/local/share/groupoffice
+#VOLUME /usr/local/share/groupoffice
+
+#Download package from sourceforge
+ADD https://iweb.dl.sourceforge.net/project/group-office/6.3/groupoffice-com-6.3.3-php-7.1-BETA.tar.gz /tmp/
+#COPY /groupoffice-com-6.3.3-php-7.1-BETA.tar.gz /tmp/
+RUN tar zxvfC /tmp/groupoffice-com-6.3.3-php-7.1-BETA.tar.gz /tmp/ \
+    && rm /tmp/groupoffice-com-6.3.3-php-7.1-BETA.tar.gz \
+    && mv /tmp/groupoffice-com-6.3.3-php-7.1 /usr/local/share/groupoffice
 
 #Install ioncube
 ADD https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz /tmp/

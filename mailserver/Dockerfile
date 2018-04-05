@@ -1,6 +1,6 @@
 FROM debian:stretch-slim
 
-VOLUME /home/vmail
+VOLUME /var/mail/vhosts
 
 ENV MYSQL_USER groupoffice
 ENV MYSQL_PASSWORD groupoffice
@@ -12,7 +12,7 @@ RUN apt-get update
 RUN apt-get install -y postfix postfix-mysql dovecot-imapd dovecot-mysql dovecot-lmtpd dovecot-sieve dovecot-managesieved supervisor bash rsyslog
 
 #Add user for mail handling
-RUN useradd -r -u 150 -g mail -d /home/vmail -m -s /sbin/nologin -c "Virtual Mailbox" vmail
+RUN useradd -r -u 150 -g mail -d /var/mail/vhosts -m -s /sbin/nologin -c "Virtual Mailbox" vmail
 
 
 # Dovecot config
@@ -46,7 +46,7 @@ RUN postconf -e 'smtpd_sasl_auth_enable = yes' && \
   postconf -e 'virtual_minimum_uid = 150' && \
   postconf -e 'virtual_uid_maps = static:150' && \
   postconf -e 'virtual_gid_maps = static:8' && \
-  postconf -e 'virtual_mailbox_base = /home/vmail' && \
+  postconf -e 'virtual_mailbox_base = /var/mail/vhosts' && \
   postconf -e 'virtual_alias_domains =' && \
   postconf -e 'virtual_alias_maps = proxy:mysql:$config_directory/mysql_virtual_alias_maps.cf' && \
   postconf -e 'virtual_mailbox_domains = proxy:mysql:$config_directory/mysql_virtual_mailbox_domains.cf' && \

@@ -10,7 +10,7 @@ EXPOSE 80
 EXPOSE 443
 
 RUN apt-get update && \
-    apt-get install -y libxml2-dev libpng-dev && \
+    apt-get install -y libxml2-dev libpng-dev zip && \
     docker-php-ext-install soap pdo pdo_mysql calendar gd
 
 #configure apache

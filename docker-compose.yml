@@ -3,6 +3,7 @@ services:
   groupoffice:
     image: intermesh/groupoffice
     container_name: groupoffice
+    restart: always
     build:
       context: ./groupoffice
     ports:
@@ -28,6 +29,7 @@ services:
   mailserver:
     image: intermesh/mailserver
     container_name: mailserver
+    restart: always
     build:
       context: ./mailserver
     ports: 

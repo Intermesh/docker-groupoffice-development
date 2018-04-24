@@ -10,8 +10,12 @@ EXPOSE 80
 EXPOSE 443
 
 RUN apt-get update && \
-    apt-get install -y libxml2-dev libpng-dev zip && \
-    docker-php-ext-install soap pdo pdo_mysql calendar gd
+    apt-get install -y libxml2-dev libpng-dev zip tnef && \
+    docker-php-ext-install soap pdo pdo_mysql calendar gd sysvshm sysvsem sysvmsg
+
+#sysvshm sysvsem sysvmsg are for z-push
+
+COPY ./etc/php.ini /usr/local/etc/php/
 
 #configure apache
 ADD ./etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf

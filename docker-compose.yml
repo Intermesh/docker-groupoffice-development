@@ -4,8 +4,6 @@ services:
     image: intermesh/groupoffice
     container_name: groupoffice
     restart: always
-    build:
-      context: ./groupoffice
     ports:
       - "80:80"
     links:
@@ -27,11 +25,9 @@ services:
       - "8306:3306"
       
   mailserver:
-    image: intermesh/mailserver
+    image: intermesh/groupoffice-mailserver
     container_name: mailserver
     restart: always
-    build:
-      context: ./mailserver
     ports: 
       - "143:143"
       - "4190:4190"

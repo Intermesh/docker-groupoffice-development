@@ -5,6 +5,9 @@ ENV MYSQL_PASSWORD groupoffice
 ENV MYSQL_DATABASE groupoffice
 ENV MYSQL_HOST db
 
+ENV APACHE_SERVER_NAME localhost
+ENV APACHE_SERVER_ADMIN admin@localhost
+
 
 EXPOSE 80
 EXPOSE 443
@@ -20,6 +23,8 @@ COPY ./etc/php.ini /usr/local/etc/php/
 
 #configure apache
 ADD ./etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf
+RUN sed -i 's/{serverName}/'$APACHE_SERVER_NAME'/' /etc/apache2/sites-available/000-default.conf
+RUN sed -i 's/{serverAdmin}/'$APACHE_SERVER_ADMIN'/' /etc/apache2/sites-available/000-default.conf
 
 #default group-office config
 ADD ./etc/groupoffice/config.ini /etc/groupoffice/config.ini
@@ -36,7 +41,7 @@ VOLUME /var/lib/groupoffice
 #VOLUME /usr/local/share/groupoffice
 
 #Download package from sourceforge
-ADD https://iweb.dl.sourceforge.net/project/group-office/6.3/groupoffice-com-6.3.3-php-7.1-BETA.tar.gz /tmp/
+ADD https://iweb.dl.sourceforge.net/project/group-office/6.3/groupoffice-com-6.3.4-php-7.1-BETA.tar.gz /tmp/
 #COPY /groupoffice-com-6.3.3-php-7.1-BETA.tar.gz /tmp/
 RUN tar zxvfC /tmp/groupoffice-com-6.3.3-php-7.1-BETA.tar.gz /tmp/ \
     && rm /tmp/groupoffice-com-6.3.3-php-7.1-BETA.tar.gz \

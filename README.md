@@ -32,8 +32,7 @@ Installation
    docker-compose run sass ./views/Extjs3/themes/Paper/src/style-mobile.scss ./views/Extjs3/themes/Paper/style-mobile.css
    `````````````````````````````````````````````````````````````````````````````````````````````
 
-5. Install Group-Office by going to http://localhost:8000/install.
-   Note: Database name, username and password are all "groupoffice". Use "db" as hostname and 3306 as port.
+5. Install Group-Office by going to http://localhost
 
 6. PhpMyAdmin runs on port 8001.
 

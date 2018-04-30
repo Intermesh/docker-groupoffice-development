@@ -16,13 +16,15 @@ services:
   db:
     container_name: db
     image: mariadb
-    restart: always
-    volumes:
-      - ./data/mysql:/var/lib/mysql:cached
-    env_file:
-      - ./db.env
+    restart: always    
     ports:
       - "8306:3306"
+    env_file:
+      - ./db.env
+    environment:
+      MYSQL_ROOT_PASSWORD: groupoffice
+    volumes:
+      - ./data/mysql:/var/lib/mysql:cached
       
   mailserver:
     image: intermesh/groupoffice-mailserver

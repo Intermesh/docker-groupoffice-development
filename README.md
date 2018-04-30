@@ -10,7 +10,7 @@ Installation
 1. Clone this repository:
 
    `````````````````````````````````````````````````````````````````````````
-   git clone https://github.com/Intermesh/groupoffice-docker-development.git
+   git clone --recurse-submodules https://github.com/Intermesh/groupoffice-docker-development.git
    `````````````````````````````````````````````````````````````````````````
 
 2. Run the containers:

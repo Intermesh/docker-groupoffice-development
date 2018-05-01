@@ -2,7 +2,7 @@ version: "3.1"
 services:
   groupoffice:
     image: intermesh/groupoffice
-    container_name: groupoffice
+    container_name: go_web
     restart: always
     ports:
       - "80:80"
@@ -14,7 +14,7 @@ services:
     env_file:
       - ./db.env
   db:
-    container_name: db
+    container_name: go_db
     image: mariadb
     restart: always    
     ports:
@@ -28,7 +28,7 @@ services:
       
   mailserver:
     image: intermesh/groupoffice-mailserver
-    container_name: mailserver
+    container_name: go_mailserver
     restart: always
     ports: 
       - "143:143"
@@ -43,7 +43,7 @@ services:
       - ./data/vmail:/var/mail/vhosts:cached
       
   composer:
-    container_name: composer
+    container_name: go_composer
     build:
        context: ./composer
     volumes: 
@@ -60,7 +60,7 @@ services:
     
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
+    container_name: go_phpmyadmin
     links: 
      - db:db
     env_file:
@@ -69,4 +69,9 @@ services:
     ports:
      - 8001:80
     volumes:
-     - /sessions  
+     - /sessions
+  phpunit:
+    container_name: go_phpunit
+    image: phpunit/phpunit
+    volumes: 
+     - ./src/groupoffice:/app

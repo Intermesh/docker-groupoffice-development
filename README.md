@@ -22,7 +22,7 @@ Installation
 4. Run php composer install once:
 
    ```````````````````````````````````
-   docker-compose run composer install
+   docker-compose run composer install --no-dev --optimize-autoloader
    ```````````````````````````````````
 
 5. Build css (or do this without IDE):
@@ -47,4 +47,12 @@ Open shell
 
 `````````````````````````````````````````````````````
 docker exec -it --user root groupoffice bash
+`````````````````````````````````````````````````````
+
+Unit testing
+------------
+
+WARNING: This will destroy and recreate database called "groupoffice_phpunit"
+`````````````````````````````````````````````````````
+docker-compose run phpunit -c tests/phpunit.xml tests
 `````````````````````````````````````````````````````

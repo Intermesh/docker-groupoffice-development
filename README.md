@@ -1,7 +1,14 @@
 Group-Office docker compose
 ===========================
 
-This docker compose environment can be used for development.
+This docker compose environment can be used for development. It will install these services:
+
+1. mariadb
+2. mailserver based on dovecot and postfix
+3. groupoffice apache web server with php 7.0 with ioncube and xdebug
+4. phpunit for testing
+5. composer
+6. sass
 
 
 Installation
@@ -36,7 +43,10 @@ Installation
 
 6. PhpMyAdmin runs on port 8001.
 
-7. Stop the containers:
+7. Webgrind for performance tuning runs on port 8002. You can create a profile 
+   by setting the GET parameter XDEBUG_PROFILE=1. Also see the xdebug docs.
+
+8. Stop the containers:
 
    ```````````````````
    docker-compose stop

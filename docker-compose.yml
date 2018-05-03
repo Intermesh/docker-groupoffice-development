@@ -12,8 +12,11 @@ services:
     volumes:
       - ./src/groupoffice/www:/usr/local/share/groupoffice:cached
       - ./data/files:/var/lib/groupoffice:cached
+      - "webgrind:/tmp/webgrind:rw"
     env_file:
-      - ./db.env
+      - ./db.env     
+    environment:
+      XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
   db:
     container_name: go_db
     image: mariadb
@@ -76,3 +79,17 @@ services:
     image: phpunit/phpunit
     volumes: 
      - ./src/groupoffice:/app
+  webgrind:
+    ports: 
+      - "8002:8080"
+    container_name: webgrind
+    image: tbfisher/webgrind
+    environment:
+      XDEBUG_OUTPUT_DIR: /tmp
+      WEBGRIND_STORAGE_DIR: /tmp
+      PHP_MAX_EXECUTION_TIME: 1200
+    volumes:
+      - "webgrind:/tmp:rw"
+volumes:
+  webgrind:
+    driver: local

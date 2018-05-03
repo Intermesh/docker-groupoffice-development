@@ -1,8 +1,9 @@
 version: "3.1"
 services:
   groupoffice:
-    image: intermesh/groupoffice
     container_name: go_web
+    build:
+      context: ./groupoffice
     restart: always
     ports:
       - "80:80"

@@ -84,6 +84,7 @@ services:
       - "8002:8080"
     container_name: webgrind
     image: tbfisher/webgrind
+    restart: always
     environment:
       XDEBUG_OUTPUT_DIR: /tmp
       WEBGRIND_STORAGE_DIR: /tmp

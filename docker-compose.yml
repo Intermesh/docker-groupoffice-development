@@ -55,12 +55,12 @@ services:
     working_dir: /var/www/html
     
   sass:
-    container_name: sass
+    container_name: go_sass
     build:
        context: ./sass       
     volumes: 
-      - ./src/groupoffice/www:/var/www/html
-    working_dir: /var/www/html
+      - ./src/groupoffice:/groupoffice
+    working_dir: /groupoffice
     
   phpmyadmin:
     image: phpmyadmin/phpmyadmin

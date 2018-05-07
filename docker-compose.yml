@@ -57,7 +57,8 @@ services:
   sass:
     container_name: go_sass
     build:
-       context: ./sass       
+       context: ./sass    
+    restart: always
     volumes: 
       - ./src/groupoffice:/groupoffice
     working_dir: /groupoffice

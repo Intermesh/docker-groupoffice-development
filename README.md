@@ -9,8 +9,8 @@ This docker compose environment can be used for development. It will install the
 4. phpunit for testing
 5. PhpMyAdmin running on port 8001.
 6. Webgrind for performance tuning runs on port 8002. 
-7. composer
-8. sass
+7. PHP composer container to run composer commands
+8. sass container that will watch and compile sass files for you.
 
 Installation
 ------------
@@ -38,15 +38,8 @@ Installation
    docker-compose run composer install --no-dev
    ```````````````````````````````````
 
-5. Build css (or do this without IDE):
-
-   `````````````````````````````````````````````````````````````````````````````````````````````
-   docker-compose run sass ./views/Extjs3/themes/Paper/src/style.scss ./views/Extjs3/themes/Paper/style.css
-   docker-compose run sass ./views/Extjs3/themes/Paper/src/style-mobile.scss ./views/Extjs3/themes/Paper/style-mobile.css
-   `````````````````````````````````````````````````````````````````````````````````````````````
-
-6. Install Group-Office by going to http://localhost
-7. All done
+5. Install Group-Office by going to http://localhost
+6. All done
 
 
 Unit testing

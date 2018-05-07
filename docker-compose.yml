@@ -11,7 +11,7 @@ services:
       - db
     volumes:
       - ./src/groupoffice/www:/usr/local/share/groupoffice:cached
-      - ./data/files:/var/lib/groupoffice:cached
+      - "godata:/var/lib/groupoffice:cached"
       - "webgrind:/tmp/webgrind:rw"
     env_file:
       - ./db.env     
@@ -28,7 +28,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: groupoffice
     volumes:
-      - ./data/mysql:/var/lib/mysql:cached
+      - "dbdata:/var/lib/mysql:cached"
       
   mailserver:
     image: intermesh/groupoffice-mailserver
@@ -44,7 +44,7 @@ services:
     environment:
       POSTMASTER_EMAIL: postmaster@example.com
     volumes:
-      - ./data/vmail:/var/mail/vhosts:cached
+      - "vmail:/var/mail/vhosts:cached"
       
   composer:
     container_name: go_composer
@@ -94,3 +94,6 @@ services:
 volumes:
   webgrind:
     driver: local
+  godata:
+  dbdata:
+  vmail:

@@ -13,6 +13,7 @@ services:
       - ./src/groupoffice/www:/usr/local/share/groupoffice:cached
       - "godata:/var/lib/groupoffice:cached"
       - "webgrind:/tmp/webgrind:rw"
+      - "goetc:/etc/groupoffice:cached"
     env_file:
       - ./db.env     
     environment:
@@ -70,11 +71,14 @@ services:
      - db:db
     env_file:
       - ./db.env
+    environment:
+      MYSQL_ROOT_PASSWORD: groupoffice
     restart: always
     ports:
      - 8001:80
     volumes:
      - /sessions
+#     - ./phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
   phpunit:
     container_name: go_phpunit
     image: phpunit/phpunit
@@ -96,5 +100,6 @@ volumes:
   webgrind:
     driver: local
   godata:
+  goetc:
   dbdata:
   vmail:

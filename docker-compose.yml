@@ -48,9 +48,8 @@ services:
       - "vmail:/var/mail/vhosts:cached"
       
   composer:
+    image: composer
     container_name: go_composer
-    build:
-       context: ./composer
     volumes: 
       - ./src/groupoffice/www:/var/www/html
     working_dir: /var/www/html

@@ -35,7 +35,7 @@ Installation
 4. Run php composer install once:
 
    ```````````````````````````````````
-   docker-compose run composer install --no-dev
+   docker-compose run composer install --no-dev --ignore-platform-reqs
    ```````````````````````````````````
 
 5. Install Group-Office by going to http://localhost

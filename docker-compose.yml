@@ -13,7 +13,7 @@ services:
       - ./src/groupoffice/www:/usr/local/share/groupoffice:cached
       - "godata:/var/lib/groupoffice:cached"
       - "webgrind:/tmp/webgrind:rw"
-      - "goetc:/etc/groupoffice:cached"
+      - "goetc:/etc/groupoffice/multi_instance:cached"
     env_file:
       - ./db.env     
     environment:

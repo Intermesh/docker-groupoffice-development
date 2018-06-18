@@ -73,7 +73,19 @@ services:
       - ./db.env
     environment:
       MYSQL_ROOT_PASSWORD: groupoffice
-    restart: always
+      
+      #Auto login as root
+      PMA_USER: root
+      PMA_PASSWORD: groupoffice
+      
+      # Settings for configuration storage. You must create this database manually. See README.md
+      PMA_PMADB: phpmyadmin
+      PMA_CONTROLHOST: db
+      PMA_CONTROLPORT: 3306
+      PMA_CONTROLUSER: root
+      PMA_CONTROLPASS: groupoffice
+      PMA_PMADB: phpmyadmin
+      restart: always
     ports:
      - 8001:80
     volumes:

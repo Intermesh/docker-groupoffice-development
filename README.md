@@ -7,7 +7,7 @@ This docker compose environment can be used for development. It will install the
 2. mailserver based on dovecot and postfix
 3. groupoffice apache web server with php 7.0 with ioncube and xdebug running on port 80
 4. phpunit for testing
-5. PhpMyAdmin running on port 8001.
+5. PhpMyAdmin running on port 8001. (see below on how to make phpmyadmin settings persist)
 6. Webgrind for performance tuning runs on port 8002. 
 7. PHP composer container to run composer commands
 8. sass container that will watch and compile sass files for you.
@@ -61,3 +61,26 @@ If you'd like to open a shell inside the container then you can run:
 `````````````````````````````````````````````````````
 docker exec -it --user root groupoffice bash
 `````````````````````````````````````````````````````
+
+
+PhpMyAdmin
+----------
+
+PhpMyAdmin runs on localhost:8001 by default. But it has no place to store it's
+settings yet. You can fix that by loging in at the phpmyadmin console and run:
+
+```
+apk update
+apk add mysql-client
+mysql -u root -pgroupoffice -h db phpmyadmin < /www/sql/create_tables.sql
+```
+
+Now recreate the containers:
+
+```
+docker-compose down
+docker-compose up -d
+```
+
+Check the main settings page and the warning message should be gone and the 
+settings will persist.

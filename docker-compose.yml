@@ -31,6 +31,7 @@ services:
       MYSQL_ROOT_PASSWORD: groupoffice
     volumes:
       - "dbdata:/var/lib/mysql:cached"
+      #- /Users/mschering/Downloads:/root/Downloads # Useful for importing large dump files
       
   mailserver:
     image: intermesh/groupoffice-mailserver

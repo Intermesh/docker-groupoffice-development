@@ -35,6 +35,9 @@ services:
       
   mailserver:
     image: intermesh/groupoffice-mailserver
+    # When using local builds for testing:
+    #build:
+    #   context: ../docker-groupoffice-mailserver
     container_name: go_mailserver
     restart: always
     ports: 

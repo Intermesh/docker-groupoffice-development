@@ -70,7 +70,7 @@ PhpMyAdmin runs on localhost:8001 by default. But it has no place to store it's
 settings yet. You can fix that by running:
 
 ```sh
-# in host (logs into the correct docker container)
+# in host (login to the correct docker container)
 docker exec -it --user root go_phpmyadmin sh
 # in container
 apk update # update the package database

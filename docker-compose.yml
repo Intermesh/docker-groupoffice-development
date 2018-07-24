@@ -12,6 +12,7 @@ services:
       - db
     volumes:
       - ./src/groupoffice/www:/usr/local/share/groupoffice:cached
+      #- /Users/mschering/Downloads/groupoffice-6.3.21-php-71:/usr/local/share/groupoffice:cached
       - "godata:/var/lib/groupoffice:cached"
       - "webgrind:/tmp/webgrind:rw"
       - "goetc:/etc/groupoffice/multi_instance:cached"
@@ -89,7 +90,7 @@ services:
       PMA_CONTROLUSER: root
       PMA_CONTROLPASS: groupoffice
       PMA_PMADB: phpmyadmin
-      restart: always
+    restart: always
     ports:
      - 8001:80
     volumes:

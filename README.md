@@ -67,12 +67,15 @@ PhpMyAdmin
 ----------
 
 PhpMyAdmin runs on localhost:8001 by default. But it has no place to store it's
-settings yet. You can fix that by loging in at the phpmyadmin console and run:
+settings yet. You can fix that by running:
 
-```
-apk update
-apk add mysql-client
-mysql -u root -pgroupoffice -h db phpmyadmin < /www/sql/create_tables.sql
+```sh
+# in host (login to the correct docker container)
+docker exec -it --user root go_phpmyadmin sh
+# in container
+apk update # update the package database
+apk add mysql-client # get a mysql client for running sql
+mysql -u root -pgroupoffice -h db < /www/sql/create_tables.sql # create the database
 ```
 
 Now recreate the containers:

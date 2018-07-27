@@ -39,7 +39,25 @@ Installation
    ```````````````````````````````````
 
 5. Install Group-Office by going to http://localhost
-6. All done
+
+6. Configure a cron job on the host machine to run:
+
+   ```
+   * * * * * root /usr/local/bin/docker exec --user www-data go_web php /usr/local/share/groupoffice/groupofficecli.php -r=core/cron/run -q
+   ```
+
+	 On MacOS I ran on the terminal:
+
+   ```
+   crontab -e
+   ```
+
+   And added:
+
+   ```
+   * * * * * /usr/local/bin/docker exec --user www-data go_web php /usr/local/share/groupoffice/groupofficecli.php -r=core/cron/run -q
+   ```
+7. All done
 
 
 Unit testing

@@ -33,11 +33,15 @@ This docker compose environment can be used for development. It will install the
  cd groupoffice-docker-development
  ```
 
- 3. Run the containers:
+ 3. Run the containers.
 
  ```sh
  docker-compose up -d
  ```
+
+ > Note: Docker commands need to be run as a user in the `docker` group, or `root`.
+ > A user in the docker group [probably has root access][docker-root] (also see
+ > [here][docker-root2]).
 
  4. Run php composer install once:
 
@@ -91,3 +95,6 @@ docker-compose up -d
 
 Check the main settings page and the warning message should be gone and the 
 settings will persist.
+
+[docker-root]: https://github.com/docker/docker/issues/9976
+[docker-root2]: https://docs.docker.com/engine/security/security/

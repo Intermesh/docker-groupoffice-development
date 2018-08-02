@@ -15,13 +15,13 @@ This docker compose environment can be used for development. It will install the
 Installation
 ------------
 
- 1. Clone this repository:
+1. Clone this repository:
 
  ```
  git clone --recurse-submodules https://github.com/Intermesh/groupoffice-docker-development.git
  ```
 
- 1. Select which groupoffice commit you wish to work with.
+2. Select which groupoffice commit you wish to work with.
 
  For example, to use latest master
 
@@ -39,27 +39,27 @@ Installation
  popd
  ```
 
- 2. Go into the cloned directory:
+3. Go into the cloned directory:
 
  ```
  cd groupoffice-docker-development
  ```
 
- 3. Run the containers:
+4. Run the containers:
 
  ```
  docker-compose up -d
  ```
 
- 4. Run php composer install once:
+5. Run php composer install once:
 
  ```
  docker-compose run composer install --no-dev --ignore-platform-reqs
  ```
 
- 5. Install Group-Office by going to http://localhost
+6. Install Group-Office by going to http://localhost
 
- 6. Configure a cron job on the host machine to run:
+7. Configure a cron job on the host machine to run:
 
  ```
  * * * * * root /usr/local/bin/docker exec --user www-data go_web php /usr/local/share/groupoffice/groupofficecli.php -r=core/cron/run -q
@@ -75,7 +75,7 @@ Installation
  > * * * * * /usr/local/bin/docker exec --user www-data go_web php /usr/local/share/groupoffice/groupofficecli.php -r=core/cron/run -q
  > ```
 
- 7. All done
+8. All done
 
 Unit testing
 ------------

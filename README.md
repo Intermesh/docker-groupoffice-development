@@ -35,7 +35,7 @@ Installation
 
  ```
  pushd groupoffice/src
- git checkout 6.3
+ git checkout 6.3.x
  popd
  ```
 

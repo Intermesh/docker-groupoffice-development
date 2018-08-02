@@ -17,68 +17,87 @@ Installation
 
 1. Clone this repository:
 
-   `````````````````````````````````````````````````````````````````````````
-   git clone --recurse-submodules https://github.com/Intermesh/groupoffice-docker-development.git
-   `````````````````````````````````````````````````````````````````````````
-   
-2. Go into the cloned directory:
-   `````````````````````````````````
-   cd groupoffice-docker-development
-   `````````````````````````````````
+ ```
+ git clone --recurse-submodules https://github.com/Intermesh/groupoffice-docker-development.git
+ ```
 
-3. Run the containers:
+2. Select which groupoffice commit you wish to work with.
 
-   ````````````````````
-   docker-compose up -d
-   ````````````````````
+ For example, to use latest master
 
-4. Run php composer install once:
+ ```
+ pushd groupoffice/src
+ git checkout master
+ popd
+ ```
 
-   ```````````````````````````````````
-   docker-compose run composer install --no-dev --ignore-platform-reqs
-   ```````````````````````````````````
+ Or to use the 6.3 branch
 
-5. Install Group-Office by going to http://localhost
+ ```
+ pushd groupoffice/src
+ git checkout 6.3.x
+ popd
+ ```
 
-6. Configure a cron job on the host machine to run:
+3. Go into the cloned directory:
 
-   ```
-   * * * * * root /usr/local/bin/docker exec --user www-data go_web php /usr/local/share/groupoffice/groupofficecli.php -r=core/cron/run -q
-   ```
+ ```
+ cd groupoffice-docker-development
+ ```
 
-	 On MacOS I ran on the terminal:
+4. Run the containers:
 
-   ```
-   crontab -e
-   ```
+ ```
+ docker-compose up -d
+ ```
 
-   And added:
+5. Run php composer install once:
 
-   ```
-   * * * * * /usr/local/bin/docker exec --user www-data go_web php /usr/local/share/groupoffice/groupofficecli.php -r=core/cron/run -q
-   ```
-7. All done
+ ```
+ docker-compose run composer install --no-dev --ignore-platform-reqs
+ ```
 
+6. Install Group-Office by going to http://localhost
+
+7. Configure a cron job on the host machine to run:
+
+ ```
+ * * * * * root /usr/local/bin/docker exec --user www-data go_web php /usr/local/share/groupoffice/groupofficecli.php -r=core/cron/run -q
+ ```
+
+ > On MacOS I ran on the terminal:
+ > ```
+ > crontab -e
+ > ```
+ >
+ > And added:
+ > ```
+ > * * * * * /usr/local/bin/docker exec --user www-data go_web php /usr/local/share/groupoffice/groupofficecli.php -r=core/cron/run -q
+ > ```
+
+8. All done
 
 Unit testing
 ------------
 
-WARNING: This will destroy and recreate database called "groupoffice_phpunit"
-`````````````````````````````````````````````````````
+> **WARNING**: This will destroy and recreate database called "groupoffice_phpunit".
+
+```
 docker-compose run phpunit -c tests/phpunit.xml tests
-`````````````````````````````````````````````````````
+```
 
 Profiling
 ---------
-You can create a profile by setting the GET parameter XDEBUG_PROFILE=1. Also see the xdebug docs for more options.
+You can create a profile by setting the GET parameter `XDEBUG_PROFILE=1`.
+Also see the xdebug docs for more options.
 
 Open shell
 ----------
 If you'd like to open a shell inside the container then you can run:
 
-`````````````````````````````````````````````````````
+```
 docker exec -it --user root groupoffice bash
-`````````````````````````````````````````````````````
+```
 
 
 PhpMyAdmin
@@ -103,5 +122,5 @@ docker-compose down
 docker-compose up -d
 ```
 
-Check the main settings page and the warning message should be gone and the 
+Check the main settings page and the warning message should be gone and the
 settings will persist.

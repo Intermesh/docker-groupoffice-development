@@ -11,11 +11,10 @@ services:
     links:
       - db
     volumes:
-      - ./src/groupoffice/www:/usr/local/share/groupoffice:cached
-      #- /Users/mschering/Downloads/groupoffice-6.3.21-php-71:/usr/local/share/groupoffice:cached
-      - "godata:/var/lib/groupoffice:cached"
+      - ./src/groupoffice/www:/usr/local/share/groupoffice
+      - "godata:/var/lib/groupoffice"
       - "webgrind:/tmp/webgrind:rw"
-      - "goetc:/etc/groupoffice/multi_instance:cached"
+      - "goetc:/etc/groupoffice/multi_instance"
     env_file:
       - ./db.env     
     environment:

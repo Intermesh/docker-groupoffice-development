@@ -28,18 +28,14 @@ Installation
  ```
  
 4. Select which groupoffice commit you wish to work with.
-
- For example, to use latest master
-
- ```
- git checkout master
- ```
-
- Or to use the 6.3 branch
-
- ```
- git checkout 6.3.x
- ```
+   For example, to use latest master
+   ```
+   git checkout master
+   ```
+   Or to use the 6.3 branch
+   ```
+   git checkout 6.3.x
+   ```
 
 5. Run the containers:
 

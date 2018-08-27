@@ -21,45 +21,41 @@ Installation
  git clone --recurse-submodules https://github.com/Intermesh/groupoffice-docker-development.git
  ```
 
-2. Select which groupoffice commit you wish to work with.
+3. Go into src/groupoffice:
+
+ ```
+ cd groupoffice-docker-development/src/groupoffice
+ ```
+ 
+4. Select which groupoffice commit you wish to work with.
 
  For example, to use latest master
 
  ```
- pushd groupoffice/src
  git checkout master
- popd
  ```
 
  Or to use the 6.3 branch
 
  ```
- pushd groupoffice/src
  git checkout 6.3.x
- popd
  ```
 
-3. Go into the cloned directory:
-
- ```
- cd groupoffice-docker-development
- ```
-
-4. Run the containers:
+5. Run the containers:
 
  ```
  docker-compose up -d
  ```
 
-5. Run php composer install once:
+6. Run php composer install once:
 
  ```
  docker-compose run composer install --no-dev --ignore-platform-reqs
  ```
 
-6. Install Group-Office by going to http://localhost
+7. Install Group-Office by going to http://localhost
 
-7. Configure a cron job on the host machine to run:
+8. Configure a cron job on the host machine to run:
 
  ```
  * * * * * root /usr/local/bin/docker exec --user www-data go_web php /usr/local/share/groupoffice/groupofficecli.php -r=core/cron/run -q
@@ -75,7 +71,7 @@ Installation
  > * * * * * /usr/local/bin/docker exec --user www-data go_web php /usr/local/share/groupoffice/groupofficecli.php -r=core/cron/run -q
  > ```
 
-8. All done
+9. All done
 
 Unit testing
 ------------

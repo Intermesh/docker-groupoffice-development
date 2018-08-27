@@ -106,9 +106,10 @@ docker exec -it --user root go_phpmyadmin sh
 apk update # update the package database
 apk add mysql-client # get a mysql client for running sql
 mysql -u root -pgroupoffice -h db < /www/sql/create_tables.sql # create the database
+exit
 ```
 
-Now recreate the containers:
+Now recreate the containers on the host:
 
 ```
 docker-compose down

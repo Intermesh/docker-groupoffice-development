@@ -55,7 +55,7 @@ Installation
    On Linux create a file /etc/cron.d/groupoffice and add:
 
    ```
-   * * * * * root /usr/local/bin/docker exec --user www-data go_web php /usr/local/share/groupoffice/groupofficecli.php -r=core/cron/run -q
+   * * * * * root docker exec --user www-data go_web php /usr/local/share/groupoffice/cron.php
    ```
 
     > On MacOS I ran on the terminal:
@@ -65,7 +65,7 @@ Installation
     >
     > And added:
     > ```
-    > * * * * * /usr/local/bin/docker exec --user www-data go_web php /usr/local/share/groupoffice/groupofficecli.php -r=core/cron/run -q
+    > * * * * * /usr/local/bin/docker exec --user www-data go_web php /usr/local/share/groupoffice/cron.php
     > ```
 
 9. All done

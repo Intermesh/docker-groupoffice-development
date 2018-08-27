@@ -21,61 +21,54 @@ Installation
  git clone --recurse-submodules https://github.com/Intermesh/groupoffice-docker-development.git
  ```
 
-2. Select which groupoffice commit you wish to work with.
-
- For example, to use latest master
+3. Go into src/groupoffice:
 
  ```
- pushd groupoffice/src
- git checkout master
- popd
+ cd groupoffice-docker-development/src/groupoffice
  ```
+ 
+4. Select which groupoffice commit you wish to work with.
+   For example, to use latest master
+   ```
+   git checkout master
+   ```
+   Or to use the 6.3 branch
+   ```
+   git checkout 6.3.x
+   ```
 
- Or to use the 6.3 branch
-
- ```
- pushd groupoffice/src
- git checkout 6.3.x
- popd
- ```
-
-3. Go into the cloned directory:
-
- ```
- cd groupoffice-docker-development
- ```
-
-4. Run the containers:
+5. Run the containers:
 
  ```
  docker-compose up -d
  ```
 
-5. Run php composer install once:
+6. Run php composer install once:
 
  ```
  docker-compose run composer install --no-dev --ignore-platform-reqs
  ```
 
-6. Install Group-Office by going to http://localhost
+7. Install Group-Office by going to http://localhost
 
-7. Configure a cron job on the host machine to run:
+8. Configure a cron job on the host machine so that Group Office can run scheduled tasks. 
+   On Linux create a file /etc/cron.d/groupoffice and add:
 
- ```
- * * * * * root /usr/local/bin/docker exec --user www-data go_web php /usr/local/share/groupoffice/groupofficecli.php -r=core/cron/run -q
- ```
+   ```
+   * * * * * root docker exec --user www-data go_web php /usr/local/share/groupoffice/cron.php
+   ```
 
- > On MacOS I ran on the terminal:
- > ```
- > crontab -e
- > ```
- >
- > And added:
- > ```
- > * * * * * /usr/local/bin/docker exec --user www-data go_web php /usr/local/share/groupoffice/groupofficecli.php -r=core/cron/run -q
- > ```
+    > On MacOS I ran on the terminal:
+    > ```
+    > crontab -e
+    > ```
+    >
+    > And added:
+    > ```
+    > * * * * * /usr/local/bin/docker exec --user www-data go_web php /usr/local/share/groupoffice/cron.php
+    > ```
 
-8. All done
+9. All done
 
 Unit testing
 ------------
@@ -113,9 +106,10 @@ docker exec -it --user root go_phpmyadmin sh
 apk update # update the package database
 apk add mysql-client # get a mysql client for running sql
 mysql -u root -pgroupoffice -h db < /www/sql/create_tables.sql # create the database
+exit
 ```
 
-Now recreate the containers:
+Now recreate the containers on the host:
 
 ```
 docker-compose down

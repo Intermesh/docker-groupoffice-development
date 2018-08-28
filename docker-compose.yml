@@ -12,7 +12,7 @@ services:
       - db
     volumes:
       - ./src/groupoffice/www:/usr/local/share/groupoffice
-      - "godata:/var/lib/groupoffice"
+      - "godata:/var/lib/groupoffice:cached"
       - "webgrind:/tmp/webgrind:rw"
       - "goetc:/etc/groupoffice/multi_instance"
     env_file:

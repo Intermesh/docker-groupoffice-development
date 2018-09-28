@@ -46,7 +46,7 @@ Installation
 6. Run php composer install once:
 
  ```
- docker-compose run composer install --no-dev --ignore-platform-reqs
+ docker-compose run --rm composer install --no-dev --ignore-platform-reqs
  ```
 
 7. Install Group-Office by going to http://localhost
@@ -76,7 +76,7 @@ Unit testing
 > **WARNING**: This will destroy and recreate database called "groupoffice_phpunit".
 
 ```
-docker-compose run phpunit -c tests/phpunit.xml tests
+docker-compose run --rm phpunit -c tests/phpunit.xml tests
 ```
 
 Profiling

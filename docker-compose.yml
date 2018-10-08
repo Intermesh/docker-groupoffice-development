@@ -11,10 +11,10 @@ services:
     links:
       - db
     volumes:
-      - ./src/groupoffice/www:/usr/local/share/groupoffice
+      - ./src/groupoffice/www:/usr/local/share/groupoffice:cached
       - "godata:/var/lib/groupoffice:cached"
       - "webgrind:/tmp/webgrind:rw"
-      - "goetc:/etc/groupoffice/multi_instance"
+      - "goetc:/etc/groupoffice/multi_instance:cached"
     env_file:
       - ./db.env     
     environment:
@@ -51,6 +51,7 @@ services:
       POSTMASTER_EMAIL: postmaster@example.com
     volumes:
       - "vmail:/var/mail/vhosts:cached"
+      #- /Users/mschering/Downloads:/root/Downloads # Useful for importing email source files
       
   composer:
     image: composer

@@ -11,14 +11,16 @@ services:
     links:
       - db
     volumes:
-      - ./src/groupoffice/www:/usr/local/share/groupoffice:cached
-      - "godata:/var/lib/groupoffice:cached"
-      - "webgrind:/tmp/webgrind:rw"
-      - "goetc:/etc/groupoffice/multi_instance:cached"
+      - appcode-native-osx-sync:/usr/local/share/groupoffice:nocopy # nocopy is important
+      #- ./src/groupoffice/www:/usr/local/share/groupoffice:delegated
+      - "godata:/var/lib/groupoffice:delegated"
+      - "webgrind:/tmp/webgrind:delegated"
+      - "goetc:/etc/groupoffice/multi_instance:delegated"
     env_file:
       - ./db.env     
     environment:
       XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
+    working_dir: /usr/local/share/groupoffice
   db:
     container_name: go_db
     image: mariadb
@@ -31,13 +33,13 @@ services:
       MYSQL_ROOT_PASSWORD: groupoffice
     volumes:
       - "dbdata:/var/lib/mysql:cached"
-      #- /Users/mschering/Downloads:/root/Downloads # Useful for importing large dump files
+      - /Users/mschering/Downloads:/root/Downloads # Useful for importing large dump files
       
   mailserver:
-    image: intermesh/groupoffice-mailserver
+    #image: intermesh/groupoffice-mailserver
     # When using local builds for testing:
-    #build:
-    #   context: ../docker-groupoffice-mailserver
+    build:
+       context: ../docker-groupoffice-mailserver
     container_name: go_mailserver
     restart: always
     ports: 
@@ -64,7 +66,7 @@ services:
     container_name: go_sass
     build:
        context: ./sass    
-    restart: always
+    #restart: always
     volumes: 
       - ./src/groupoffice:/groupoffice
     working_dir: /groupoffice
@@ -93,8 +95,8 @@ services:
     restart: always
     ports:
      - 8001:80
-    volumes:
-     - /sessions
+    #volumes:
+     #- /sessions
 #     - ./phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
   phpunit:
     container_name: go_phpunit
@@ -112,7 +114,7 @@ services:
       WEBGRIND_STORAGE_DIR: /tmp
       PHP_MAX_EXECUTION_TIME: 1200
     volumes:
-      - "webgrind:/tmp:rw"
+      - "webgrind:/tmp:delegated"
 volumes:
   webgrind:
     driver: local
@@ -120,3 +122,5 @@ volumes:
   goetc:
   dbdata:
   vmail:
+  appcode-native-osx-sync:
+    external: true

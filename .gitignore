@@ -1,3 +1,4 @@
 /data
 /nbproject
 .DS_Store
+.docker-sync

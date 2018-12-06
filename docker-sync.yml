@@ -3,6 +3,17 @@ version: "2"
 options:
   verbose: false
 syncs:
-  appcode-native-osx-sync: # tip: add -sync and you keep consistent names as a convention
-    src: './src/groupoffice/www'
+  master-sync: # tip: add -sync and you keep consistent names as a convention
+    src: './src/master/www'
     notify_terminal: true
+    sync_excludes: ['Gemfile.lock', 'Gemfile', 'config.rb', '.sass-cache', 'sass', 'sass-cache', 'composer.json' , 'bower.json', 'package.json', 'Gruntfile*', 'bower_components', 'node_modules', '.gitignore', '.git', '*.coffee', '*.scss', '*.sass']
+
+    
+  63-sync:
+    src: './src/63/www'
+    notify_terminal: true
+    sync_excludes: ['Gemfile.lock', 'Gemfile', 'config.rb', '.sass-cache', 'sass', 'sass-cache', 'composer.json' , 'bower.json', 'package.json', 'Gruntfile*', 'bower_components', 'node_modules', '.gitignore', '.git', '*.coffee', '*.scss', '*.sass']
+    
+#  addressbook-sync:
+#    src: './src/addressbook/www'
+#    notify_terminal: true

@@ -118,3 +118,28 @@ docker-compose up -d
 
 Check the main settings page and the warning message should be gone and the
 settings will persist.
+
+
+Multiple branches:
+------------------
+
+Checkout new source in the "src" directory
+
+```
+cd src
+git clone -b 6.3.x https://github.com/Intermesh/groupoffice.git 63
+```
+
+Run composer for the branch:
+
+```
+docker-compose run -w /root/src/63/www --rm composer install --no-dev --ignore-platform-reqs
+```
+
+
+See dockerfile for example:
+Duplicate the go_web container and the go_data and go_etc volumes
+Change the database to groupoffice-63
+
+
+

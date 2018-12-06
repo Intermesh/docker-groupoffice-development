@@ -1,17 +1,63 @@
 version: "3.1"
 services:
-  groupoffice:
-    container_name: go_web
+  groupoffice-63:
+    container_name: go_web_63
     build:
       context: ./groupoffice
-    restart: always
+    #restart: always
+    ports:      
+      - "63443:443"
+    links:
+      - db
+    volumes:
+      - 63-sync:/usr/local/share/groupoffice:nocopy
+      - "godata_63:/var/lib/groupoffice:delegated"
+      - "webgrind:/tmp/webgrind:delegated"
+      - "goetc_63:/etc/groupoffice/multi_instance:delegated"
+    env_file:
+      - ./db.env     
+    environment:
+      XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
+      MYSQL_DATABASE: go63
+      #MYSQL_DATABASE: test
+      
+    working_dir: /usr/local/share/groupoffice
+    
+#  groupoffice-addressbook:
+#    container_name: go_web_addressbook
+#    build:
+#      context: ./groupoffice
+##    restart: always
+#    ports:      
+#      - "64443:443"
+#    links:
+#      - db
+#    volumes:
+#      - addressbook-sync:/usr/local/share/groupoffice:nocopy
+#      - "godata_addressbook:/var/lib/groupoffice:delegated"
+#      - "webgrind:/tmp/webgrind:delegated"
+#      - "goetc_addressbook:/etc/groupoffice/multi_instance:delegated"
+#    env_file:
+#      - ./db.env     
+#    environment:
+#      XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
+#      MYSQL_DATABASE: intermesh_group_office_com
+#      
+#    working_dir: /usr/local/share/groupoffice
+  
+  
+  groupoffice-master:
+    container_name: go_web_master
+    build:
+      context: ./groupoffice
+    #restart: always
     ports:
       - "80:80"
       - "443:443"
     links:
       - db
     volumes:
-      - appcode-native-osx-sync:/usr/local/share/groupoffice:nocopy # nocopy is important
+      - master-sync:/usr/local/share/groupoffice:nocopy
       #- ./src/groupoffice/www:/usr/local/share/groupoffice:delegated
       - "godata:/var/lib/groupoffice:delegated"
       - "webgrind:/tmp/webgrind:delegated"
@@ -20,11 +66,13 @@ services:
       - ./db.env     
     environment:
       XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
+      MYSQL_DATABASE: groupoffice-master
+      
     working_dir: /usr/local/share/groupoffice
   db:
     container_name: go_db
     image: mariadb
-    restart: always    
+    #restart: always    
     ports:
       - "8306:3306"
     env_file:
@@ -41,7 +89,7 @@ services:
     build:
        context: ../docker-groupoffice-mailserver
     container_name: go_mailserver
-    restart: always
+    #restart: always
     ports: 
       - "143:143"
       - "4190:4190"
@@ -59,8 +107,8 @@ services:
     image: composer
     container_name: go_composer
     volumes: 
-      - ./src/groupoffice/www:/var/www/html
-    working_dir: /var/www/html
+      - ./src:/root/src      
+    working_dir: /root/src/master/www
     
   sass:
     container_name: go_sass
@@ -92,7 +140,7 @@ services:
       PMA_CONTROLUSER: root
       PMA_CONTROLPASS: groupoffice
       PMA_PMADB: phpmyadmin
-    restart: always
+    #restart: always
     ports:
      - 8001:80
     #volumes:
@@ -117,10 +165,21 @@ services:
       - "webgrind:/tmp:delegated"
 volumes:
   webgrind:
-    driver: local
   godata:
   goetc:
+    
+  godata_addressbook:
+  goetc_addressbook:
+    
+  godata_63:
+  goetc_63:
+    
   dbdata:
   vmail:
-  appcode-native-osx-sync:
+  master-sync:
     external: true
+  63-sync:
+    external: true
+  #addressbook-sync:
+  #  external: true
+

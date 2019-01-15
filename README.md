@@ -76,7 +76,7 @@ Unit testing
 > **WARNING**: This will destroy and recreate database called "groupoffice_phpunit".
 
 ```
-docker-compose run --rm phpunit -c tests/phpunit.xml tests
+docker-compose run --rm phpunit -c master/tests/phpunit.xml master/tests
 ```
 
 Profiling

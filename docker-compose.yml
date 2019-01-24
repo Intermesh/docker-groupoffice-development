@@ -19,7 +19,7 @@ services:
       - ./db.env     
     environment:
       XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
-      MYSQL_DATABASE: go63
+      MYSQL_DATABASE: groupoffice
       #MYSQL_DATABASE: test
       
     working_dir: /usr/local/share/groupoffice
@@ -44,7 +44,7 @@ services:
 #      XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
 #      MYSQL_DATABASE: intermesh_group_office_com
 #      
-#    working_dir: /usr/local/share/groupoffice
+#    working_dir: /usr/local/Volumes/Projects/docker-groupoffice-development/db.env/share/groupoffice
   
   
   groupoffice-master:
@@ -81,14 +81,14 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: groupoffice
     volumes:
-      - "dbdata:/var/lib/mysql:cached"
+      - "dbdata:/var/lib/mysql"
       - /Users/mschering/Downloads:/root/Downloads # Useful for importing large dump files
       
   mailserver:
-    #image: intermesh/groupoffice-mailserver
-    # When using local builds for testing:
-    build:
-       context: ../docker-groupoffice-mailserver
+    image: intermesh/groupoffice-mailserver
+    ## When using local builds for testing:
+    #build:
+    #   context: ../docker-groupoffice-mailserver
     container_name: go_mailserver
     #restart: always
     ports: 
@@ -117,8 +117,8 @@ services:
        context: ./sass    
     #restart: always
     volumes: 
-      - ./src/groupoffice:/groupoffice
-    working_dir: /groupoffice
+      - ./src:/src
+    working_dir: /src
     
   phpmyadmin:
     image: phpmyadmin/phpmyadmin

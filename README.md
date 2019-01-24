@@ -1,7 +1,10 @@
 Group-Office docker compose
 ===========================
 
-This docker compose environment can be used for development. It will install these services:
+This docker compose environment can be used for development. To improve performance
+on MacOS and Windows we also use Docker Sync (https://github.com/EugenMayer/docker-sync/).
+
+It will install these services:
 
 1. mariadb
 2. mailserver based on dovecot and postfix
@@ -15,43 +18,38 @@ This docker compose environment can be used for development. It will install the
 Installation
 ------------
 
-1. Clone this repository:
+1. Make sure docker and docker-compose are installed.
 
- ```
- git clone --recurse-submodules https://github.com/Intermesh/groupoffice-docker-development.git
- ```
+2. Make sure docker-sync is installed https://github.com/EugenMayer/docker-sync/wiki/1.-Installation
 
-3. Go into src/groupoffice:
+3. Clone this repository:
 
- ```
- cd groupoffice-docker-development/src/groupoffice
- ```
- 
-4. Select which groupoffice commit you wish to work with.
-   For example, to use latest master
    ```
-   git checkout master
+   git clone --recurse-submodules https://github.com/Intermesh/groupoffice-docker-development.git
    ```
-   Or to use the 6.3 branch
+
+3. Go into src/63 and checkout the 6.3.x branch:
+
    ```
+   cd groupoffice-docker-development/src/63`
    git checkout 6.3.x
    ```
 
-5. Run the containers:
+4. Run php composer install once:
 
- ```
- docker-compose up -d
- ```
+   ```
+   docker-compose run --rm composer install --no-dev --ignore-platform-reqs
+   ```
 
-6. Run php composer install once:
+5. Run the stack:
 
- ```
- docker-compose run --rm composer install --no-dev --ignore-platform-reqs
- ```
+   ```
+   docker-sync-stack start
+   ```
 
-7. Install Group-Office by going to http://localhost
+6. Install Group-Office by going to http://localhost
 
-8. Configure a cron job on the host machine so that Group Office can run scheduled tasks. 
+7. Configure a cron job on the host machine so that Group Office can run scheduled tasks. 
    On Linux create a file /etc/cron.d/groupoffice and add:
 
    ```
@@ -68,7 +66,11 @@ Installation
     > * * * * * /usr/local/bin/docker exec --user www-data go_web php /usr/local/share/groupoffice/cron.php
     > ```
 
-9. All done
+8. All done. Next time you only have to run`;
+
+   ```
+   docker-sync-stack start
+   ```
 
 Unit testing
 ------------
@@ -91,7 +93,6 @@ If you'd like to open a shell inside the container then you can run:
 ```
 docker exec -it --user root groupoffice bash
 ```
-
 
 PhpMyAdmin
 ----------

@@ -13,9 +13,9 @@ services:
     volumes:
       #- /Volumes/Projects/docker-groupoffice-development/src/63/www:/usr/local/share/groupoffice
       - 63-sync:/usr/local/share/groupoffice:nocopy
-      - "godata_63:/var/lib/groupoffice:delegated"
-      - "webgrind:/tmp/webgrind:delegated"
-      - "goetc_63:/etc/groupoffice/multi_instance:delegated"
+      - "godata_63:/var/lib/groupoffice"
+      - "webgrind:/tmp/webgrind"
+      - "goetc_63:/etc/groupoffice/multi_instance"
     env_file:
       - ./db.env     
     environment:
@@ -60,10 +60,10 @@ services:
       - db
     volumes:
       - master-sync:/usr/local/share/groupoffice:nocopy
-      #- ./src/groupoffice/www:/usr/local/share/groupoffice:delegated
-      - "godata:/var/lib/groupoffice:delegated"
+      #- ./src/master/www:/usr/local/share/groupoffice # Sometimes it's required not to sync. If you want to run scripts to modify source (import language) because sync is one way from host to container.
+      - "godata:/var/lib/groupoffice"
       - "webgrind:/tmp/webgrind:delegated"
-      - "goetc:/etc/groupoffice/multi_instance:delegated"
+      - "goetc:/etc/groupoffice/multi_instance"
     env_file:
       - ./db.env     
     environment:
@@ -102,7 +102,7 @@ services:
     environment:
       POSTMASTER_EMAIL: postmaster@example.com
     volumes:
-      - "vmail:/var/mail/vhosts:cached"
+      - "vmail:/var/mail/vhosts"
       - /Users/mschering/Downloads:/root/Downloads # Useful for importing email source files
       
   composer:
@@ -164,7 +164,7 @@ services:
       WEBGRIND_STORAGE_DIR: /tmp
       PHP_MAX_EXECUTION_TIME: 1200
     volumes:
-      - "webgrind:/tmp:delegated"
+      - "webgrind:/tmp"
 volumes:
   webgrind:
   godata:

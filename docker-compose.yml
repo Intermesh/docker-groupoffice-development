@@ -60,7 +60,7 @@ services:
       - db
     volumes:
       - master-sync:/usr/local/share/groupoffice:nocopy
-      #- ./src/master/www:/usr/local/share/groupoffice # Sometimes it's required not to sync. If you want to run scripts to modify source (import language) because sync is one way from host to container.
+      #- ./src/master/www:/usr/local/share/groupoffice:delegated # Sometimes it's required not to sync. If you want to run scripts to modify source (import language) because sync is one way from host to container.
       - "godata:/var/lib/groupoffice"
       - "webgrind:/tmp/webgrind:delegated"
       - "goetc:/etc/groupoffice/multi_instance"

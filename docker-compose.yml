@@ -11,8 +11,12 @@ services:
     links:
       - db
     volumes:
+      # Use this bind mount when not using docker-sync
       - /Volumes/Projects/docker-groupoffice-development/src/63/www:/usr/local/share/groupoffice
-      #- 63-sync:/usr/local/share/groupoffice:nocopy
+      
+      # Use the mount below when using docker-sync
+      #- 63-sync:/usr/local/share/groupoffice:nocopy      
+      
       - "godata_63:/var/lib/groupoffice"
       - "webgrind:/tmp/webgrind"
       - "goetc_63:/etc/groupoffice/multi_instance"
@@ -59,8 +63,12 @@ services:
     links:
       - db
     volumes:
-      #- master-sync:/usr/local/share/groupoffice:nocopy
+      # Use this bind mount when not using docker-sync
       - ./src/master/www:/usr/local/share/groupoffice:delegated # Sometimes it's required not to sync. If you want to run scripts to modify source (import language) because sync is one way from host to container.
+      
+      # Use the mount below when using docker-sync
+      #- master-sync:/usr/local/share/groupoffice:nocopy
+            
       - "godata:/var/lib/groupoffice"
       - "webgrind:/tmp/webgrind:delegated"
       - "goetc:/etc/groupoffice/multi_instance"
@@ -178,10 +186,10 @@ volumes:
     
   dbdata:
   vmail:
-  #master-sync:
-  #  external: true
-  #63-sync:
-  #  external: true
+  master-sync:
+    external: true
+  63-sync:
+    external: true
   #addressbook-sync:
   #  external: true
 

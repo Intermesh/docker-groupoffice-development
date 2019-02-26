@@ -1,8 +1,9 @@
 Group-Office docker compose
 ===========================
 
-This docker compose environment can be used for development. To improve performance
-on MacOS and Windows we also use Docker Sync (https://github.com/EugenMayer/docker-sync/).
+This docker compose environment can be used for development. 
+
+To improve performance on MacOS and Windows you can optionally use Docker Sync (https://github.com/EugenMayer/docker-sync/).
 
 It will install these services:
 
@@ -20,7 +21,8 @@ Installation
 
 1. Make sure docker and docker-compose are installed.
 
-2. Make sure docker-sync is installed https://github.com/EugenMayer/docker-sync/wiki/1.-Installation
+2. Optionally install docker-sync (Recommended on Mac OS to improve performance) https://github.com/EugenMayer/docker-sync/wiki/1.-Installation
+   When you do this you must edit docker-compose.yml and switch the mounts for groupoffice-master and groupoffice-63 too.
 
 3. Clone this repository:
 
@@ -42,6 +44,12 @@ Installation
    ```
 
 5. Run the stack:
+
+   ```
+   docker-compose up -d
+   ```
+   
+	 Or when using docker-sync
 
    ```
    docker-sync-stack start
@@ -66,11 +74,8 @@ Installation
     > * * * * * /usr/local/bin/docker exec --user www-data go_web php /usr/local/share/groupoffice/cron.php
     > ```
 
-8. All done. Next time you only have to run`;
+8. All done. Next time you only have to repeat step 5.
 
-   ```
-   docker-sync-stack start
-   ```
 
 Unit testing
 ------------

@@ -1,12 +1,21 @@
 FROM intermesh/groupoffice
+#FROM groupoffice-test
+# To test changes in intermesh/groupoffice
+# Build it with:
+#
+# docker build -t groupoffice-test .
+#
+# and use here: FROM groupoffice-test
 
 #Group-Office sources
 VOLUME /usr/local/share/groupoffice
 
-RUN pecl install xdebug && docker-php-ext-enable xdebug
+#beta is required for php 7.3
+RUN pecl install xdebug-beta && docker-php-ext-enable xdebug
 
 COPY ./etc/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-#COPY ./etc/apache2/sites-enabled/001-branches.conf /etc/apache2/sites-enabled/001-branches.conf
+
+RUN touch /var/log/xdebug.log && chmod 666 /var/log/xdebug.log
 
 #Enable debug mode for development
 RUN sed -i "s/config\['debug'\] = false;/config\['debug'\] = true;/" /etc/groupoffice/config.php.tpl

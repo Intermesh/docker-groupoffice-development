@@ -117,8 +117,8 @@ services:
     image: composer
     container_name: go_composer
     volumes: 
-      - ./src:/root/src      
-    working_dir: /root/src/master/www
+      - ./src:/src      
+    working_dir: /src/master/www
     
   sass:
     container_name: go_sass

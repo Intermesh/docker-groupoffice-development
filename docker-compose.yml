@@ -6,7 +6,7 @@ services:
       context: ./groupoffice
     #restart: always
     ports:      
-      - "63443:443"
+      - "63:443"
       - "6380:80"
     links:
       - db

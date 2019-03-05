@@ -42,6 +42,12 @@ Installation
    ```
    docker-compose run --rm composer install --no-dev --ignore-platform-reqs
    ```
+   
+   Or for the 6.3 branch that's in src/64:
+   
+   ```
+   docker-compose run -w /src/63/www --rm composer update --no-dev --ignore-platform-reqs
+   ```
 
 5. Run the stack:
 

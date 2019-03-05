@@ -43,7 +43,7 @@ Installation
    docker-compose run --rm composer install --no-dev --ignore-platform-reqs
    ```
    
-   Or for the 6.3 branch that's in src/64:
+   Or for the 6.3 branch that's in src/63:
    
    ```
    docker-compose run -w /src/63/www --rm composer update --no-dev --ignore-platform-reqs
@@ -55,7 +55,7 @@ Installation
    docker-compose up -d
    ```
    
-	 Or when using docker-sync
+   Or when using docker-sync
 
    ```
    docker-sync-stack start

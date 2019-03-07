@@ -13,6 +13,9 @@ VOLUME /usr/local/share/groupoffice
 #beta is required for php 7.3
 RUN pecl install xdebug-beta && docker-php-ext-enable xdebug
 
+# Install small text editor to make config.php changes
+RUN apt-get install nano
+
 COPY ./etc/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 RUN touch /var/log/xdebug.log && chmod 666 /var/log/xdebug.log

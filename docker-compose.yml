@@ -48,7 +48,7 @@ services:
       - "godata:/var/lib/groupoffice"
       - "webgrind:/tmp/webgrind:delegated"
       - "goetc:/etc/groupoffice/multi_instance"
-      - ./ssl:/etc/ssl/groupoffice
+      # - ./ssl:/etc/ssl/groupoffice
     env_file:
       - ./db.env     
     environment:

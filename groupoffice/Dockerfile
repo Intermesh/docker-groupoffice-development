@@ -7,8 +7,11 @@ FROM intermesh/groupoffice
 #
 # and use here: FROM groupoffice-test
 
+RUN rm -rf /usr/local/share/groupoffice
+RUN ln -s /usr/local/share/src/www /usr/local/share/groupoffice
+
 #Group-Office sources
-VOLUME /usr/local/share/groupoffice
+VOLUME /usr/local/share/src
 
 #beta is required for php 7.3
 RUN pecl install xdebug-beta && docker-php-ext-enable xdebug

@@ -26,82 +26,85 @@ Installation
 
 3. Clone this repository:
 
-   ```
+   ```bash
    git clone --recurse-submodules https://github.com/Intermesh/groupoffice-docker-development.git
    ```
 
-3. Go into src/63 and checkout the 6.3.x branch:
+4. Go into src/63 and checkout the 6.3.x branch:
 
-   ```
+   ```bash
    cd groupoffice-docker-development/src/63`
    git checkout 6.3.x
    ```
 
-4. Run php composer install once:
+5. Run php composer install once:
 
+   ```bash
+   docker-compose run --rm composer install --ignore-platform-reqs
    ```
-   docker-compose run --rm composer install --no-dev --ignore-platform-reqs
-   ```
-   
+
    Or for the 6.3 branch that's in src/63:
-   
-   ```
-   docker-compose run -w /src/63/www --rm composer update --no-dev --ignore-platform-reqs
+
+   ```bash
+   docker-compose run -w /src/63/www --rm composer install --ignore-platform-reqs
    ```
 
-5. Run the stack:
+6. Run the stack:
 
-   ```
+   ```bash
    docker-compose up -d
    ```
-   
+
    Or when using docker-sync
 
-   ```
+   ```bash
    docker-sync-stack start
    ```
 
-6. Install Group-Office by going to http://localhost
+7. Install Group-Office by going to http://localhost
 
-7. Configure a cron job on the host machine so that Group Office can run scheduled tasks. 
+8. Configure a cron job on the host machine so that Group Office can run scheduled tasks. 
    On Linux create a file /etc/cron.d/groupoffice and add:
 
-   ```
+   ```cron
    * * * * * root docker exec --user www-data go_web php /usr/local/share/groupoffice/cron.php
    ```
 
     > On MacOS I ran on the terminal:
-    > ```
+    >
+    > ```bash
     > crontab -e
     > ```
     >
     > And added:
-    > ```
+    >
+    > ```bash
     > * * * * * /usr/local/bin/docker exec --user www-data go_web php /usr/local/share/groupoffice/cron.php
     > ```
 
-8. All done. Next time you only have to repeat step 5.
-
+9. All done. Next time you only have to repeat step 5.
 
 Unit testing
 ------------
 
 > **WARNING**: This will destroy and recreate database called "groupoffice_phpunit".
 
-```
-docker-compose run --rm phpunit -c master/tests/phpunit.xml master/tests
+```bash
+docker-compose exec groupoffice-master ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml tests
 ```
 
 Profiling
 ---------
+
 You can create a profile by setting the GET parameter `XDEBUG_PROFILE=1`.
 Also see the xdebug docs for more options.
 
 Open shell
 ----------
+
 If you'd like to open a shell inside the container then you can run:
 
-```
+```bash
 docker exec -it --user root groupoffice bash
 ```
 
@@ -123,7 +126,7 @@ exit
 
 Now recreate the containers on the host:
 
-```
+```bash
 docker-compose down
 docker-compose up -d
 ```
@@ -131,27 +134,22 @@ docker-compose up -d
 Check the main settings page and the warning message should be gone and the
 settings will persist.
 
-
 Multiple branches:
 ------------------
 
 Checkout new source in the "src" directory
 
-```
+```bash
 cd src
 git clone -b 6.3.x https://github.com/Intermesh/groupoffice.git 63
 ```
 
 Run composer for the branch:
 
-```
+```bash
 docker-compose run -w /root/src/63/www --rm composer install --no-dev --ignore-platform-reqs
 ```
-
 
 See dockerfile for example:
 Duplicate the go_web container and the go_data and go_etc volumes
 Change the database to groupoffice-63
-
-
-

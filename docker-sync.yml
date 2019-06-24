@@ -7,7 +7,7 @@ options:
 
 syncs:
   master-sync: # tip: add -sync and you keep consistent names as a convention
-    src: './src/master/www'
+    src: './src/master'
     host_disk_mount_mode: 'cached'
     notify_terminal: true
     sync_excludes_type: 'Name'
@@ -16,7 +16,7 @@ syncs:
 
     
   63-sync:
-    src: './src/63/www'
+    src: './src/63'
     host_disk_mount_mode: 'cached'
     notify_terminal: true
     sync_excludes_type: 'Name'

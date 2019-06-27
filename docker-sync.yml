@@ -12,8 +12,14 @@ syncs:
     notify_terminal: true
     sync_excludes_type: 'Name'
     sync_excludes: ['.DS_Store', '.sass-cache', 'sass', 'sass-cache', 'composer.json' , 'bower.json', 'package.json',  '.gitignore', '.git', '*.scss']
-    watch_excludes: ['.*/.DS_Store', '.*/.git', '.*/node_modules', '.*/bower_components', '.*/sass-cache', '.*/.sass-cache', '.*/.sass-cache', '.coffee', '.scss', '.sass', '.gitignore']
-
+    watch_excludes: ['.*/.DS_Store', '.*/.git', '.*/node_modules', '.*/bower_components', '.*/sass-cacd ..che', '.*/.sass-cache', '.*/.sass-cache', '.coffee', '.scss', '.sass', '.gitignore']
+    # monit can be used to monitor the health of unison in the native_osx strategy and can restart unison if it detects a problem
+    # optional: use this to switch monit monitoring on
+    monit_enable: true
+    # optional: use this to change how many seconds between each monit check (cycle)
+    monit_interval: 5
+    # optional: use this to change how many consecutive times high cpu usage must be observed before unison is restarted
+    monit_high_cpu_cycles: 2
     
   63-sync:
     src: './src/63'
@@ -22,7 +28,13 @@ syncs:
     sync_excludes_type: 'Name'
     sync_excludes: ['.DS_Store', 'Gemfile.lock', 'Gemfile', 'config.rb', '.sass-cache', 'sass', 'sass-cache', 'composer.json' , 'bower.json', 'package.json', 'Gruntfile*', 'bower_components', 'node_modules', '.gitignore', '.git', '*.coffee', '*.scss', '*.sass']
     watch_excludes: ['.*/.DS_Store',.*/.git', '.*/node_modules', '.*/bower_components', '.*/sass-cache', '.*/.sass-cache', '.*/.sass-cache', '.coffee', '.scss', '.sass', '.gitignore']
-
+    # monit can be used to monitor the health of unison in the native_osx strategy and can restart unison if it detects a problem
+    # optional: use this to switch monit monitoring on
+    monit_enable: true
+    # optional: use this to change how many seconds between each monit check (cycle)
+    monit_interval: 5
+    # optional: use this to change how many consecutive times high cpu usage must be observed before unison is restarted
+    monit_high_cpu_cycles: 2
     
 #  addressbook-sync:
 #    src: './src/addressbook/www'

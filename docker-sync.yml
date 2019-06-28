@@ -9,10 +9,10 @@ syncs:
   master-sync: # tip: add -sync and you keep consistent names as a convention
     src: './src/master'
     host_disk_mount_mode: 'cached'
-    notify_terminal: true
+    notify_terminal: false
     sync_excludes_type: 'Name'
-    sync_excludes: ['.DS_Store', '.sass-cache', 'sass', 'sass-cache', 'composer.json' , 'bower.json', 'package.json',  '.gitignore', '.git', '*.scss']
-    watch_excludes: ['.*/.DS_Store', '.*/.git', '.*/node_modules', '.*/bower_components', '.*/sass-cacd ..che', '.*/.sass-cache', '.*/.sass-cache', '.coffee', '.scss', '.sass', '.gitignore']
+    sync_excludes: ['.DS_Store', '.sass-cache', 'sass', 'sass-cache', 'composer.json' , 'bower.json', 'package.json',  '.gitignore', '.git', '*.scss', .gitignore]
+    watch_excludes: ['.*/.DS_Store', '.*/.git', '.*/node_modules', '.*/bower_components', '.*/sass-cache', '.*/.sass-cache', '.*/.sass-cache', '.coffee', '.scss', '.sass', '.gitignore']
     # monit can be used to monitor the health of unison in the native_osx strategy and can restart unison if it detects a problem
     # optional: use this to switch monit monitoring on
     monit_enable: true
@@ -24,7 +24,7 @@ syncs:
   63-sync:
     src: './src/63'
     host_disk_mount_mode: 'cached'
-    notify_terminal: true
+    notify_terminal: false
     sync_excludes_type: 'Name'
     sync_excludes: ['.DS_Store', 'Gemfile.lock', 'Gemfile', 'config.rb', '.sass-cache', 'sass', 'sass-cache', 'composer.json' , 'bower.json', 'package.json', 'Gruntfile*', 'bower_components', 'node_modules', '.gitignore', '.git', '*.coffee', '*.scss', '*.sass']
     watch_excludes: ['.*/.DS_Store',.*/.git', '.*/node_modules', '.*/bower_components', '.*/sass-cache', '.*/.sass-cache', '.*/.sass-cache', '.coffee', '.scss', '.sass', '.gitignore']

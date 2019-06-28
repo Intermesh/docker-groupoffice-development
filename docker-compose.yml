@@ -12,7 +12,7 @@ services:
       - db
     volumes:
       # Use this bind mount when not using docker-sync
-      #- /Volumes/Projects/docker-groupoffice-development/src/63:/usr/local/share/src
+      # - /Volumes/Projects/docker-groupoffice-development/src/63:/usr/local/share/src:delegated
       
       # Use the mount below when using docker-sync
       - 63-sync:/usr/local/share/src:nocopy      
@@ -41,14 +41,16 @@ services:
       - db
     volumes:
       # Use this bind mount when not using docker-sync
-      #- ./src/master:/usr/local/share/src:delegated 
+      # - ./src/master:/usr/local/share/src:delegated 
       
       # Use the mount below when using docker-sync
       - master-sync:/usr/local/share/src:nocopy           
+
       - "godata:/var/lib/groupoffice"
       - "webgrind:/tmp/webgrind:delegated"
       - "goetc:/etc/groupoffice/multi_instance"
-      # - ./ssl:/etc/ssl/groupoffice
+
+      # - ./ssl:/etc/ssl/groupoffice:delegated
     env_file:
       - ./db.env     
     environment:
@@ -68,7 +70,7 @@ services:
       MYSQL_ROOT_PASSWORD: groupoffice
     volumes:
       - "dbdata:/var/lib/mysql"
-      - /Users/mschering/Downloads:/root/Downloads # Useful for importing large dump files
+      - /Users/mschering/Downloads:/root/Downloads:delegated # Useful for importing large dump files
       
   mailserver:
     image: intermesh/groupoffice-mailserver
@@ -88,7 +90,7 @@ services:
       POSTMASTER_EMAIL: postmaster@example.com
     volumes:
       - "vmail:/var/mail/vhosts"
-      - /Users/mschering/Downloads:/root/Downloads # Useful for importing email source files
+      - /Users/mschering/Downloads:/root/Downloads:delegated # Useful for importing email source files
       
   composer:
     image: composer

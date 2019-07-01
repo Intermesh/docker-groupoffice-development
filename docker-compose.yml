@@ -28,6 +28,57 @@ services:
       #MYSQL_DATABASE: test
       
     working_dir: /usr/local/share/src  
+
+  # groupoffice-nginx:
+  #   container_name: go_web_nginx
+  #   #build:
+  #    # context: ./nginx
+  #   image: nginx
+  #   #restart: always
+  #   ports:
+  #     - "81:80"
+  #     - "444:443"
+  #   links:
+  #     - db
+  #     - php-fpm
+
+  #   volumes:
+  #     # Use this bind mount when not using docker-sync
+  #     # - ./src/master:/usr/local/share/src:delegated 
+      
+  #     # Use the mount below when using docker-sync
+  #     - master-sync:/usr/local/share/groupoffice:nocopy   
+  #     - ./nginx/site.conf:/etc/nginx/conf.d/default.conf        
+
+      
+
+  #     #- ./ssl:/etc/ssl/groupoffice:delegated
+  #   env_file:
+  #     - ./db.env     
+  #   environment:
+  #     XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
+  #     MYSQL_DATABASE: groupoffice-master
+      
+  #   working_dir: /usr/local/share/groupoffice
+
+  # php-fpm:
+  #   build:
+  #     context: ./php-fpm
+
+  #   links:
+  #     - db
+
+  #   volumes:
+  #     # Use the mount below when using docker-sync
+  #     - master-sync:/usr/local/share/groupoffice:nocopy           
+  #     - "godata:/var/lib/groupoffice"
+  #     #- "webgrind:/tmp/webgrind:delegated"
+  #     - "goetc:/etc/groupoffice/multi_instance"
+  #   env_file:
+  #     - ./db.env     
+  #   environment:
+  #     XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
+  #     MYSQL_DATABASE: groupoffice-master
   
   groupoffice-master:
     container_name: go_web_master
@@ -39,6 +90,7 @@ services:
       - "443:443"
     links:
       - db
+
     volumes:
       # Use this bind mount when not using docker-sync
       # - ./src/master:/usr/local/share/src:delegated 
@@ -50,7 +102,7 @@ services:
       - "webgrind:/tmp/webgrind:delegated"
       - "goetc:/etc/groupoffice/multi_instance"
 
-      # - ./ssl:/etc/ssl/groupoffice:delegated
+      - ./ssl:/etc/ssl/groupoffice:delegated
     env_file:
       - ./db.env     
     environment:
@@ -158,6 +210,9 @@ volumes:
     
   godata_63:
   goetc_63:
+
+  godata_nginx:
+  goetc_nginx:
     
   dbdata:
   vmail:
@@ -165,4 +220,3 @@ volumes:
     external: true
   63-sync:
     external: true
-

@@ -112,14 +112,13 @@ services:
     working_dir: /usr/local/share/src
   db:
     container_name: go_db
-    image: mariadb
-    #restart: always    
+    image: mariadb    
     ports:
       - "8306:3306"
-    env_file:
-      - ./db.env
+
     environment:
       MYSQL_ROOT_PASSWORD: groupoffice
+
     volumes:
       - "dbdata:/var/lib/mysql"
       - /Users/mschering/Downloads:/root/Downloads:delegated # Useful for importing large dump files
@@ -155,7 +154,6 @@ services:
     container_name: go_sass
     build:
        context: ./sass    
-    #restart: always
     volumes: 
       - ./src:/src
     working_dir: /src
@@ -181,13 +179,10 @@ services:
       PMA_CONTROLUSER: root
       PMA_CONTROLPASS: groupoffice
       PMA_PMADB: phpmyadmin
-    #restart: always
+    
     ports:
      - 8001:80
-    #volumes:
-     #- /sessions
-#     - ./phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
-
+    
   webgrind:
     ports: 
       - "8002:8080"
@@ -215,6 +210,7 @@ volumes:
   goetc_nginx:
     
   dbdata:
+  
   vmail:
   master-sync:
     external: true

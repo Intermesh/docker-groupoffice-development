@@ -11,8 +11,8 @@ syncs:
     host_disk_mount_mode: 'cached'
     notify_terminal: false
     sync_excludes_type: 'Name'
-    sync_excludes: ['.DS_Store', '.sass-cache', 'sass', 'sass-cache', 'composer.json' , 'bower.json', 'package.json',  '.gitignore', '.git', '*.scss', .gitignore]
-    watch_excludes: ['.*/.DS_Store', '.*/.git', '.*/node_modules', '.*/bower_components', '.*/sass-cache', '.*/.sass-cache', '.*/.sass-cache', '.coffee', '.scss', '.sass', '.gitignore']
+    sync_excludes: ['.DS_Store', '.sass-cache', 'sass', 'sass-cache', 'composer.json' , 'bower.json', 'package.json',  '.gitignore', '.git',  .gitignore]
+    watch_excludes: ['.*/.DS_Store', '.*/.git', '.*/node_modules', '.*/bower_components', '.*/sass-cache', '.*/.sass-cache', '.*/.sass-cache', '.coffee', '.sass', '.gitignore']
     # monit can be used to monitor the health of unison in the native_osx strategy and can restart unison if it detects a problem
     # optional: use this to switch monit monitoring on
     monit_enable: true
@@ -26,8 +26,8 @@ syncs:
     host_disk_mount_mode: 'cached'
     notify_terminal: false
     sync_excludes_type: 'Name'
-    sync_excludes: ['.DS_Store', 'Gemfile.lock', 'Gemfile', 'config.rb', '.sass-cache', 'sass', 'sass-cache', 'composer.json' , 'bower.json', 'package.json', 'Gruntfile*', 'bower_components', 'node_modules', '.gitignore', '.git', '*.coffee', '*.scss', '*.sass']
-    watch_excludes: ['.*/.DS_Store',.*/.git', '.*/node_modules', '.*/bower_components', '.*/sass-cache', '.*/.sass-cache', '.*/.sass-cache', '.coffee', '.scss', '.sass', '.gitignore']
+    sync_excludes: ['.DS_Store', 'Gemfile.lock', 'Gemfile', 'config.rb', '.sass-cache', 'sass', 'sass-cache', 'composer.json' , 'bower.json', 'package.json', 'Gruntfile*', 'bower_components', 'node_modules', '.gitignore', '.git', '*.coffee', '*.sass']
+    watch_excludes: ['.*/.DS_Store',.*/.git', '.*/node_modules', '.*/bower_components', '.*/sass-cache', '.*/.sass-cache', '.*/.sass-cache', '.coffee',  '.sass', '.gitignore']
     # monit can be used to monitor the health of unison in the native_osx strategy and can restart unison if it detects a problem
     # optional: use this to switch monit monitoring on
     monit_enable: true

@@ -102,7 +102,7 @@ services:
       - "webgrind:/tmp/webgrind:delegated"
       - "goetc:/etc/groupoffice/multi_instance"
 
-      - ./ssl:/etc/ssl/groupoffice:delegated
+      #- ./ssl:/etc/ssl/groupoffice:delegated
     env_file:
       - ./db.env     
     environment:

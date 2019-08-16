@@ -118,9 +118,9 @@ settings yet. You can fix that by running:
 # in host (login to the correct docker container)
 docker exec -it --user root go_phpmyadmin sh
 # in container
-apk update # update the package database
-apk add mysql-client # get a mysql client for running sql
-mysql -u root -pgroupoffice -h db < /www/sql/create_tables.sql # create the database
+apt-get update # update the package database
+apt-get install mysql-client # get a mysql client for running sql
+mysql -u root -pgroupoffice -h db < sql/create_tables.sql # create the database
 exit
 ```
 

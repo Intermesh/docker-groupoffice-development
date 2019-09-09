@@ -11,12 +11,7 @@ services:
     links:
       - db
     volumes:
-      # Use this bind mount when not using docker-sync
-      #- /Volumes/Projects/docker-groupoffice-development/src/63:/usr/local/share/src:delegated
-      
-      # Use the mount below when using docker-sync
       - 63-sync:/usr/local/share/src:nocopy      
-      
       - "godata_63:/var/lib/groupoffice"
       - "webgrind:/tmp/webgrind"
       - "goetc_63:/etc/groupoffice/multi_instance"
@@ -92,17 +87,12 @@ services:
       - db
 
     volumes:
-      # Use this bind mount when not using docker-sync
-      #- ./src/master:/usr/local/share/src:delegated 
-      
-      # Use the mount below when using docker-sync
       - master-sync:/usr/local/share/src:nocopy           
-
       - "godata:/var/lib/groupoffice"
       - "webgrind:/tmp/webgrind:delegated"
       - "goetc:/etc/groupoffice/multi_instance"
 
-      - ./ssl:/etc/ssl/groupoffice:delegated
+      #- ./ssl:/etc/ssl/groupoffice:delegated
     env_file:
       - ./db.env     
     environment:

@@ -21,13 +21,19 @@ Installation
 
 1. Make sure docker and docker-compose are installed.
 
-2. Optionally install docker-sync (Recommended on Mac OS to improve performance) https://github.com/EugenMayer/docker-sync/wiki/1.-Installation
-   When you do this you must edit docker-compose.yml and switch the mounts for groupoffice-master and groupoffice-63 too.
 
-3. Clone this repository:
+2. Clone this repository:
 
    ```bash
    git clone --recurse-submodules https://github.com/Intermesh/groupoffice-docker-development.git
+   ```
+
+
+3. Optionally install docker-sync (Recommended on Mac OS to improve performance) https://github.com/EugenMayer/docker-sync/wiki/1.-Installation
+   When you do this you must switch this repository to the "sync" branch:
+
+   ```bash
+   git checkout sync
    ```
 
 4. Go into src/* dfirectories and checkout the branches:

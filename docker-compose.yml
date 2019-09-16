@@ -15,6 +15,7 @@ services:
       - "godata_63:/var/lib/groupoffice"
       - "webgrind:/tmp/webgrind"
       - "goetc_63:/etc/groupoffice/multi_instance"
+      - ./groupoffice/etc/groupoffice/globalconfig.inc.php:/etc/groupoffice/globalconfig.inc.php:delegated
     env_file:
       - ./db.env     
     environment:
@@ -91,8 +92,9 @@ services:
       - "godata:/var/lib/groupoffice"
       - "webgrind:/tmp/webgrind:delegated"
       - "goetc:/etc/groupoffice/multi_instance"
+      - ./groupoffice/etc/groupoffice/globalconfig.inc.php:/etc/groupoffice/globalconfig.inc.php:delegated
 
-      #- ./ssl:/etc/ssl/groupoffice:delegated
+      # - ./ssl:/etc/ssl/groupoffice:delegated
     env_file:
       - ./db.env     
     environment:

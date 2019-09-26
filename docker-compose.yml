@@ -4,7 +4,7 @@ services:
     container_name: go_web_63
     build:
       context: ./groupoffice
-    #restart: always
+    restart: always
     ports:      
       - "63:443"
       - "6380:80"
@@ -79,7 +79,7 @@ services:
     container_name: go_web_master
     build:
       context: ./groupoffice
-    #restart: always
+    restart: always
     ports:
       - "6480:80"
       - "443:443"
@@ -102,7 +102,8 @@ services:
     working_dir: /usr/local/share/src
   db:
     container_name: go_db
-    image: mariadb    
+    image: mariadb
+    restart: always   
     ports:
       - "8306:3306"
 
@@ -119,7 +120,7 @@ services:
     #build:
     #   context: ../docker-groupoffice-mailserver
     container_name: go_mailserver
-    #restart: always
+    restart: always
     ports: 
       - "143:143"
       - "4190:4190"
@@ -151,6 +152,7 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: go_phpmyadmin
+    restart: always
     links: 
      - db:db
     env_file:

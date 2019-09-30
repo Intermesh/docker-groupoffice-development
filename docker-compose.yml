@@ -94,7 +94,7 @@ services:
       - "goetc:/etc/groupoffice/multi_instance"
       - ./groupoffice/etc/groupoffice/globalconfig.inc.php:/etc/groupoffice/globalconfig.inc.php:delegated
 
-      - ./ssl:/etc/ssl/groupoffice:delegated
+      #- ./ssl:/etc/ssl/groupoffice:delegated
     env_file:
       - ./db.env     
     environment:

@@ -208,3 +208,8 @@ volumes:
   dbdata:
   
   vmail:
+
+  master-sync:
+    external: true
+  63-sync:
+    external: true

@@ -182,12 +182,13 @@ services:
     ports: 
       - "8002:8080"
     container_name: webgrind
-    image: tbfisher/webgrind
+    image: wodby/webgrind
     restart: always
     environment:
-      XDEBUG_OUTPUT_DIR: /tmp
+      WEBGRIND_PROFILER_DIR: /tmp
       WEBGRIND_STORAGE_DIR: /tmp
-      PHP_MAX_EXECUTION_TIME: 1200
+      PHP_MAX_EXECUTION_TIME: 1200,
+      WEBGRIND_DEFAULT_TIMEZONE: Europe/Amsterdam
     volumes:
       - "webgrind:/tmp"
 volumes:

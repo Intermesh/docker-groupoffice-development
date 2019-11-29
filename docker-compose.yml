@@ -13,7 +13,6 @@ services:
     volumes:
       - 63-sync:/usr/local/share/src:nocopy      
       - "godata_63:/var/lib/groupoffice"
-      - "webgrind:/tmp/webgrind"
       - "goetc_63:/etc/groupoffice/multi_instance"
       - ./groupoffice/etc/groupoffice/globalconfig.inc.php:/etc/groupoffice/globalconfig.inc.php:delegated
     env_file:
@@ -21,6 +20,7 @@ services:
     environment:
       XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
       MYSQL_DATABASE: groupoffice
+      PHP_IDE_CONFIG: "serverName=localhost" #for PHPStorm path mappings in Preferences -> PHP -> Servers
       #MYSQL_DATABASE: test
       
     working_dir: /usr/local/share/src  
@@ -75,6 +75,33 @@ services:
   #   environment:
   #     XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
   #     MYSQL_DATABASE: groupoffice-master
+
+  groupoffice-64:
+    container_name: go_web_64
+    build:
+      context: ./groupoffice
+    restart: always
+    ports:
+      - "6443:443"
+    links:
+      - db
+
+    volumes:
+      - 64-sync:/usr/local/share/src:nocopy
+      - "godata:/var/lib/groupoffice"
+      - "webgrind:/tmp/webgrind:delegated"
+      - "goetc:/etc/groupoffice/multi_instance"
+      - ./groupoffice/etc/groupoffice/globalconfig.inc.php:/etc/groupoffice/globalconfig.inc.php:delegated
+
+      - ./ssl:/etc/ssl/groupoffice:delegated
+    env_file:
+      - ./db.env
+    environment:
+      XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
+      MYSQL_DATABASE: groupoffice-64
+      PHP_IDE_CONFIG: "serverName=localhost" #for PHPStorm path mappings in Preferences -> PHP -> Servers
+
+    working_dir: /usr/local/share/src
   
   groupoffice-master:
     container_name: go_web_master
@@ -82,7 +109,6 @@ services:
       context: ./groupoffice
     restart: always
     ports:
-      - "6480:80"
       - "443:443"
     links:
       - db
@@ -94,12 +120,13 @@ services:
       - "goetc:/etc/groupoffice/multi_instance"
       - ./groupoffice/etc/groupoffice/globalconfig.inc.php:/etc/groupoffice/globalconfig.inc.php:delegated
 
-      # - ./ssl:/etc/ssl/groupoffice:delegated
+      - ./ssl:/etc/ssl/groupoffice:delegated
     env_file:
       - ./db.env     
     environment:
       XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
-      MYSQL_DATABASE: groupoffice-master
+      MYSQL_DATABASE: groupoffice_master
+      PHP_IDE_CONFIG: "serverName=localhost" #for PHPStorm path mappings in Preferences -> PHP -> Servers
       
     working_dir: /usr/local/share/src
   db:
@@ -173,7 +200,6 @@ services:
       PMA_CONTROLPORT: 3306
       PMA_CONTROLUSER: root
       PMA_CONTROLPASS: groupoffice
-      PMA_PMADB: phpmyadmin
     
     ports:
      - 8001:80
@@ -196,8 +222,8 @@ volumes:
   godata:
   goetc:
     
-  godata_addressbook:
-  goetc_addressbook:
+  godata_64:
+  goetc_64:
     
   godata_63:
   goetc_63:
@@ -212,4 +238,6 @@ volumes:
   master-sync:
     external: true
   63-sync:
+    external: true
+  64-sync:
     external: true

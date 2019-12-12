@@ -1,2 +1,11 @@
-docker-compose exec groupoffice-master ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml tests
+if [ -z "$1" ] 
+then
+	BRANCH=master
+else
+	BRANCH=$1
+fi
+
+echo "Running test in container groupoffice-$BRANCH"
+
+docker-compose exec groupoffice-$BRANCH ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml tests
 

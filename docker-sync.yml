@@ -6,6 +6,22 @@ options:
   compose-file-path: 'docker-compose.yml'
 
 syncs:
+
+  64-sync:
+    src: './src/64'
+    host_disk_mount_mode: 'cached'
+    notify_terminal: false
+    sync_excludes_type: 'Name'
+    sync_excludes: ['.DS_Store', 'Gemfile.lock', 'Gemfile', 'config.rb', '.sass-cache', 'sass', 'sass-cache', 'composer.json' , 'bower.json', 'package.json', 'Gruntfile*', 'bower_components', 'node_modules', '.gitignore', '.git', '*.coffee', '*.sass', '.idea']
+    watch_excludes: ['.*/.DS_Store', '.*/.git', '.*/node_modules', '.*/bower_components', '.*/sass-cache', '.*/.sass-cache', '.*/.sass-cache', '.*/.coffee', '.*/.sass', '.*/.gitignore', '.*/.idea']
+    # monit can be used to monitor the health of unison in the native_osx strategy and can restart unison if it detects a problem
+    # optional: use this to switch monit monitoring on
+    monit_enable: true
+    # optional: use this to change how many seconds between each monit check (cycle)
+    monit_interval: 5
+    # optional: use this to change how many consecutive times high cpu usage must be observed before unison is restarted
+    monit_high_cpu_cycles: 2
+
   master-sync: # tip: add -sync and you keep consistent names as a convention
     src: './src/master'
     host_disk_mount_mode: 'cached'
@@ -37,18 +53,5 @@ syncs:
     monit_high_cpu_cycles: 2
 
 
-  64-sync:
-    src: './src/64'
-    host_disk_mount_mode: 'cached'
-    notify_terminal: false
-    sync_excludes_type: 'Name'
-    sync_excludes: ['.DS_Store', 'Gemfile.lock', 'Gemfile', 'config.rb', '.sass-cache', 'sass', 'sass-cache', 'composer.json' , 'bower.json', 'package.json', 'Gruntfile*', 'bower_components', 'node_modules', '.gitignore', '.git', '*.coffee', '*.sass', '.idea']
-    watch_excludes: ['.*/.DS_Store', '.*/.git', '.*/node_modules', '.*/bower_components', '.*/sass-cache', '.*/.sass-cache', '.*/.sass-cache', '.*/.coffee', '.*/.sass', '.*/.gitignore', '.*/.idea']
-    # monit can be used to monitor the health of unison in the native_osx strategy and can restart unison if it detects a problem
-    # optional: use this to switch monit monitoring on
-    monit_enable: true
-    # optional: use this to change how many seconds between each monit check (cycle)
-    monit_interval: 5
-    # optional: use this to change how many consecutive times high cpu usage must be observed before unison is restarted
-    monit_high_cpu_cycles: 2
+
 

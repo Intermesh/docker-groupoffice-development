@@ -27,3 +27,16 @@ RUN touch /var/log/xdebug.log && chmod 666 /var/log/xdebug.log
 RUN sed -i "s/config\['debug'\] = false;/config\['debug'\] = true;/" /etc/groupoffice/config.php.tpl
 
 RUN sed -i "s/output_buffering = 4096/output_buffering = off/" /usr/local/etc/php/php.ini
+
+
+# For supporting host.docker.internal on Linux. See https://github.com/docker/for-linux/issues/264
+RUN ip -4 route list match 0/0 | awk '{print $3 "host.docker.internal"}' >> /etc/hosts
+
+#webgrind
+# ADD https://github.com/jokkedk/webgrind/archive/v1.6.1.tar.gz /tmp
+
+
+# RUN tar xvzfC /tmp/v1.6.1.tar.gz /tmp/ \
+#     && mv /tmp/webgrind-1.6.1 /usr/local/share/webgrind
+
+# COPY ./etc/apache2/conf-enabled/webgrind.conf /etc/apache2/conf-enabled/webgrind.conf

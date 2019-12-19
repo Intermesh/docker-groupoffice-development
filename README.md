@@ -109,6 +109,14 @@ Profiling
 You can create a profile by setting the GET parameter `XDEBUG_PROFILE=1`.
 Also see the xdebug docs for more options.
 
+Debugging
+---------
+
+Xdebug is ready to run. You just need to setup path mappings. 
+Map your local folder
+ "$YOUR_INSTALL_PATH/docker-groupoffice-development/src/master" to "/usr/local/share/src" 
+in the Docker container to tell your IDE that's where the source files are on the server.
+
 Open shell
 ----------
 

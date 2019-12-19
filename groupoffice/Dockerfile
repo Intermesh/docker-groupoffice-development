@@ -30,7 +30,8 @@ RUN sed -i "s/output_buffering = 4096/output_buffering = off/" /usr/local/etc/ph
 
 
 # For supporting host.docker.internal on Linux. See https://github.com/docker/for-linux/issues/264
-RUN ip -4 route list match 0/0 | awk '{print $3 "host.docker.internal"}' >> /etc/hosts
+RUN apt-get install -y iproute2
+RUN ip -4 route list match 0/0 | awk '{print $3 " host.docker.internal"}' >> /etc/hosts
 
 #webgrind
 # ADD https://github.com/jokkedk/webgrind/archive/v1.6.1.tar.gz /tmp

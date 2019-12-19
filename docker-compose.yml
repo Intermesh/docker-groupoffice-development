@@ -99,7 +99,7 @@ services:
       - ./db.env     
     environment:
       XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
-      MYSQL_DATABASE: groupoffice-master
+      MYSQL_DATABASE: groupoffice_master
       
     working_dir: /usr/local/share/src
   db:
@@ -111,6 +111,7 @@ services:
 
     environment:
       MYSQL_ROOT_PASSWORD: groupoffice
+      MYSQL_DATABASE:
 
     volumes:
       - "dbdata:/var/lib/mysql"

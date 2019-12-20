@@ -21,7 +21,7 @@ services:
     environment:
       XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
       MYSQL_DATABASE: groupoffice
-      #MYSQL_DATABASE: test
+      PHP_IDE_CONFIG: "serverName=localhost" #for PHPStorm path mappings in Preferences -> PHP -> Servers
       
     working_dir: /usr/local/share/src  
 
@@ -100,6 +100,8 @@ services:
     environment:
       XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
       MYSQL_DATABASE: groupoffice_master
+      PHP_IDE_CONFIG: "serverName=localhost" #for PHPStorm path mappings in Preferences -> PHP -> Servers
+
       
     working_dir: /usr/local/share/src
   db:

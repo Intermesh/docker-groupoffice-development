@@ -83,6 +83,7 @@ services:
     restart: always
     ports:
       - "6443:443"
+      - "6480:80"
     links:
       - db
 

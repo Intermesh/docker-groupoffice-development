@@ -30,7 +30,7 @@ RUN sed -i "s/output_buffering = 4096/output_buffering = off/" /usr/local/etc/ph
 
 
 # For supporting host.docker.internal on Linux. See https://github.com/docker/for-linux/issues/264
-RUN apt-get install -y iproute2
+RUN apt-get install -y iproute2 host
 COPY docker-godev-entrypoint.sh /usr/local/bin
 
 CMD ["apache2-foreground"]

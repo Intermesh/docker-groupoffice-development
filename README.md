@@ -117,6 +117,13 @@ Map your local folder
  "$YOUR_INSTALL_PATH/docker-groupoffice-development/src/master" to "/usr/local/share/src" 
 in the Docker container to tell your IDE that's where the source files are on the server.
 
+### PHPStorm
+
+For PHPStorm debugging on the command line make sure you set mappings for "localhost" at Settings -> Languages & Frameworks -> PHP -> Servers. Because we set the 'PHP_IDE_CONFIG' environment vairable to "localhost" in docker-compose.yml.
+
+See also:
+https://www.jetbrains.com/help/phpstorm/zero-configuration-debugging-cli.html#6e577196
+
 Open shell
 ----------
 

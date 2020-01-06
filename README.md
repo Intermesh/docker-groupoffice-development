@@ -144,7 +144,7 @@ settings yet. You can fix that by running:
 docker exec -it --user root go_phpmyadmin sh
 # in container
 apt-get update # update the package database
-apt-get install mysql-client # get a mysql client for running sql
+apt-get install mariadb-client # get a mysql client for running sql
 mysql -u root -pgroupoffice -h db < sql/create_tables.sql # create the database
 exit
 ```

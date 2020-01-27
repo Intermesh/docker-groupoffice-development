@@ -11,7 +11,7 @@ services:
     links:
       - db
     volumes:
-      - /Volumes/Projects/docker-groupoffice-development/src/64/usr/local/share/src:delegated
+      - /Volumes/Projects/docker-groupoffice-development/src/63:/usr/local/share/src:delegated
       - "godata_63:/var/lib/groupoffice"
       - "webgrind:/tmp/webgrind"
       - "goetc_63:/etc/groupoffice/multi_instance"
@@ -36,7 +36,7 @@ services:
     links:
       - db
     volumes:
-      - /Volumes/Projects/docker-groupoffice-development/src/63:/usr/local/share/src:delegated
+      - /Volumes/Projects/docker-groupoffice-development/src/64:/usr/local/share/src:delegated
       - "godata_64:/var/lib/groupoffice"
       - "webgrind:/tmp/webgrind"
       - "goetc_64:/etc/groupoffice/multi_instance"
@@ -45,7 +45,7 @@ services:
       - ./db.env
     environment:
       XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
-      MYSQL_DATABASE: groupoffice
+      MYSQL_DATABASE: groupoffice_64
       PHP_IDE_CONFIG: "serverName=localhost" #for PHPStorm path mappings in Preferences -> PHP -> Servers
 
     working_dir: /usr/local/share/src
@@ -108,8 +108,8 @@ services:
       context: ./groupoffice
     restart: always
     ports:
-      - "6480:80"
-      - "443:443"
+      - "6580:80"
+      - "65443:443"
     links:
       - db
 
@@ -202,7 +202,7 @@ services:
       PMA_CONTROLPORT: 3306
       PMA_CONTROLUSER: root
       PMA_CONTROLPASS: groupoffice
-      
+
     ports:
      - 8001:80
     

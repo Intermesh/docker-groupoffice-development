@@ -165,7 +165,7 @@ git clone -b 6.3.x https://github.com/Intermesh/groupoffice.git 63
 Run composer for the branch:
 
 ```bash
-docker-compose run -w /root/src/63/www --rm composer install --no-dev --ignore-platform-reqs
+docker-compose run -w /src/63/www --rm composer install --ignore-platform-reqs
 ```
 
 See dockerfile for example:

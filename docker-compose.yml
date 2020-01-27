@@ -82,7 +82,7 @@ services:
       context: ./groupoffice
     restart: always
     ports:
-      - "6443:443"
+      - "443:443"
       - "6480:80"
     links:
       - db
@@ -110,7 +110,7 @@ services:
       context: ./groupoffice
     restart: always
     ports:
-      - "443:443"
+      - "65443:443"
     links:
       - db
 

@@ -89,7 +89,7 @@ services:
 
     environment:
       MYSQL_ROOT_PASSWORD: groupoffice
-      MYSQL_DATABASE: 
+      MYSQL_DATABASE:
 
     volumes:
       - "dbdata:/var/lib/mysql"

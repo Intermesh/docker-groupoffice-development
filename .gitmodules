@@ -1,9 +1,3 @@
 [submodule "src/master"]
 	path = src/master
 	url = https://github.com/Intermesh/groupoffice.git
-[submodule "src/63"]
-	path = src/63
-	url = https://github.com/Intermesh/groupoffice.git
-[submodule "src/64"]
-        path = src/64
-        url = https://github.com/Intermesh/groupoffice.git

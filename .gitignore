@@ -6,4 +6,6 @@
 ssl
 .idea
 docker-compose.override.yml
+src/*
+!src/master
 

@@ -39,9 +39,7 @@ Installation
 4. Go into src/* dfirectories and checkout the branches:
 
    ```bash
-   cd groupoffice-docker-development/src/63`
-   git checkout 6.3.x
-   cd ../master
+   cd groupoffice-docker-development/src/master`
    git checkout master
    ```
 
@@ -69,7 +67,7 @@ Installation
    docker-sync-stack start
    ```
 
-7. Visit PHPMyAdmin at http://localhost:8001 and create the database "groupoffice" and "groupoffice-master"
+7. Visit PHPMyAdmin at http://localhost:8001 and create the database "groupoffice"
 
 8. Install Group-Office by going to http://localhost. Note you should not see a page where you enter database connection details. If you see this something is wrong with the database container.
 
@@ -100,7 +98,7 @@ Unit testing
 > **WARNING**: This will destroy and recreate database called "groupoffice_phpunit".
 
 ```bash
-docker-compose exec groupoffice-master ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml tests
+docker-compose exec groupoffice ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml tests
 ```
 
 Profiling
@@ -177,4 +175,4 @@ docker-compose run -w /root/src/63/www --rm composer install --no-dev --ignore-p
 
 See dockerfile for example:
 Duplicate the go_web container and the go_data and go_etc volumes
-Change the database to groupoffice-63
+Change the database to groupoffice_63

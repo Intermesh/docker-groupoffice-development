@@ -5,3 +5,5 @@
 .docker-sync
 ssl
 .idea
+docker-compose.override.yml
+

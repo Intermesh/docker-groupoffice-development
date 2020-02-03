@@ -1,54 +1,5 @@
 version: "3.1"
 services:
-  groupoffice-63:
-    container_name: go_web_63
-    build:
-      context: ./groupoffice
-    restart: always
-    ports:
-      - "63:443"
-      - "6380:80"
-    links:
-      - db
-    volumes:
-      - /Volumes/Projects/docker-groupoffice-development/src/63:/usr/local/share/src:delegated
-      - "godata_63:/var/lib/groupoffice"
-      - "webgrind:/tmp/webgrind"
-      - "goetc_63:/etc/groupoffice/multi_instance"
-      - ./groupoffice/etc/groupoffice/globalconfig.inc.php:/etc/groupoffice/globalconfig.inc.php:delegated
-    env_file:
-      - ./db.env
-    environment:
-      XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
-      MYSQL_DATABASE: groupoffice
-      PHP_IDE_CONFIG: "serverName=localhost" #for PHPStorm path mappings in Preferences -> PHP -> Servers
-
-    working_dir: /usr/local/share/src
-
-  groupoffice-64:
-    container_name: go_web_64
-    build:
-      context: ./groupoffice
-    restart: always
-    ports:
-      - "443:443"
-      - "6480:80"
-    links:
-      - db
-    volumes:
-      - /Volumes/Projects/docker-groupoffice-development/src/64:/usr/local/share/src:delegated
-      - "godata_64:/var/lib/groupoffice"
-      - "webgrind:/tmp/webgrind"
-      - "goetc_64:/etc/groupoffice/multi_instance"
-      - ./groupoffice/etc/groupoffice/globalconfig.inc.php:/etc/groupoffice/globalconfig.inc.php:delegated
-    env_file:
-      - ./db.env
-    environment:
-      XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
-      MYSQL_DATABASE: groupoffice_64
-      PHP_IDE_CONFIG: "serverName=localhost" #for PHPStorm path mappings in Preferences -> PHP -> Servers
-
-    working_dir: /usr/local/share/src
 
 
       # groupoffice-nginx:
@@ -102,14 +53,14 @@ services:
   #     XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
   #     MYSQL_DATABASE: groupoffice-master
   
-  groupoffice-master:
-    container_name: go_web_master
+  groupoffice:
+    container_name: go_web
     build:
       context: ./groupoffice
     restart: always
     ports:
-      - "6580:80"
-      - "65443:443"
+      - "80:80"
+      - "443:443"
     links:
       - db
 
@@ -128,7 +79,6 @@ services:
       MYSQL_DATABASE: groupoffice_master
       PHP_IDE_CONFIG: "serverName=localhost" #for PHPStorm path mappings in Preferences -> PHP -> Servers
 
-      
     working_dir: /usr/local/share/src
   db:
     container_name: go_db
@@ -139,7 +89,7 @@ services:
 
     environment:
       MYSQL_ROOT_PASSWORD: groupoffice
-      MYSQL_DATABASE:
+      MYSQL_DATABASE: 
 
     volumes:
       - "dbdata:/var/lib/mysql"
@@ -160,7 +110,7 @@ services:
     env_file:
       - ./db.env
     environment:
-      POSTMASTER_EMAIL: postmaster@example.com
+      POSTMASTER_EMAIL: admin@intermesh.localhost
     volumes:
       - "vmail:/var/mail/vhosts"
       - /Users/mschering/Downloads:/root/Downloads:delegated # Useful for importing email source files
@@ -219,20 +169,10 @@ services:
       WEBGRIND_DEFAULT_TIMEZONE: Europe/Amsterdam
     volumes:
       - "webgrind:/tmp"
+
 volumes:
   webgrind:
   godata:
   goetc:
-    
-  godata_64:
-  goetc_64:
-    
-  godata_63:
-  goetc_63:
-
-#  godata_nginx:
-#  goetc_nginx:
-    
   dbdata:
-  
   vmail:

@@ -28,50 +28,31 @@ Installation
    git clone --recurse-submodules https://github.com/Intermesh/groupoffice-docker-development.git
    ```
 
-
-3. Optionally install docker-sync (Recommended on Mac OS to improve performance) https://github.com/EugenMayer/docker-sync/wiki/1.-Installation
-   When you do this you must switch this repository to the "sync" branch:
-
-   ```bash
-   git checkout sync
-   ```
-
-4. Go into src/* dfirectories and checkout the branches:
+3. Go into src/* dfirectories and checkout the branches:
 
    ```bash
    cd groupoffice-docker-development/src/master`
    git checkout master
+   git pull
    ```
 
-5. Run php composer install once:
+4. Run php composer install once:
 
    ```bash
-   docker-compose run --rm composer install --ignore-platform-reqs
+   docker-compose run -w /src/master/www --rm composer install --ignore-platform-reqs
    ```
 
-   Or for the 6.3 branch that's in src/63:
-
-   ```bash
-   docker-compose run -w /src/63/www --rm composer install --ignore-platform-reqs
-   ```
-
-6. Run the stack:
+5. Run the stack:
 
    ```bash
    docker-compose up -d
    ```
 
-   Or when using docker-sync
+6. Visit PHPMyAdmin at http://localhost:8001 and create the database "groupoffice". (Default password for root is 'groupoffice')
 
-   ```bash
-   docker-sync-stack start
-   ```
+7. Install Group-Office by going to http://localhost/install/. Note you should not see a page where you enter database connection details. If you see this something is wrong with the database container.
 
-7. Visit PHPMyAdmin at http://localhost:8001 and create the database "groupoffice"
-
-8. Install Group-Office by going to http://localhost. Note you should not see a page where you enter database connection details. If you see this something is wrong with the database container.
-
-9. Configure a cron job on the host machine so that Group Office can run scheduled tasks. 
+8. Configure a cron job on the host machine so that Group Office can run scheduled tasks. 
    On Linux create a file /etc/cron.d/groupoffice and add:
 
    ```cron
@@ -90,7 +71,7 @@ Installation
     > * * * * * /usr/local/bin/docker exec --user www-data go_web php /usr/local/share/groupoffice/cron.php
     > ```
 
-10. All done. Next time you only have to repeat step 5.
+9. All done. Happy coding!
 
 Unit testing
 ------------

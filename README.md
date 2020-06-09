@@ -27,7 +27,7 @@ Installation
 3. Go into src/* dfirectories and checkout the branches:
 
    ```bash
-   cd groupoffice-docker-development/src/master`
+   cd groupoffice-docker-development/src/master
    git checkout master
    git pull
    ```

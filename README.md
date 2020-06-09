@@ -101,7 +101,7 @@ Open shell
 If you'd like to open a shell inside the container then you can run:
 
 ```bash
-docker exec -it --user root groupoffice bash
+docker-compose exec groupoffice bash
 ```
 
 PhpMyAdmin

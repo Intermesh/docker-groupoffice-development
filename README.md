@@ -2,19 +2,15 @@ Group-Office docker compose
 ===========================
 
 This docker compose environment can be used for development. 
-
-To improve performance on MacOS and Windows you can optionally use Docker Sync (https://github.com/EugenMayer/docker-sync/).
-
 It will install these services:
 
 1. mariadb
 2. mailserver based on dovecot and postfix
-3. groupoffice apache web server with php 7.0 with ioncube and xdebug running on port 80
+3. groupoffice apache web server with php 7.3, ioncube, composer and xdebug running on port 80
 4. phpunit for testing
 5. PhpMyAdmin running on port 8001. (see below on how to make phpmyadmin settings persist)
 6. Webgrind for performance tuning runs on port 8002. 
-7. PHP composer container to run composer commands
-8. sass container that will watch and compile sass files for you.
+7. sass container that will watch and compile sass files for you.
 
 Installation
 ------------
@@ -36,23 +32,19 @@ Installation
    git pull
    ```
 
-4. Run php composer install once:
-
-   ```bash
-   docker-compose run -w /src/master/www --rm composer install --ignore-platform-reqs
-   ```
-
-5. Run the stack:
+4. Run the stack:
 
    ```bash
    docker-compose up -d
    ```
+   
+   Note: The first time you run it 'composer install' will run. This can take some time to complete. View the logs to see the progress.
 
-6. Visit PHPMyAdmin at http://localhost:8001 and create the database "groupoffice". (Default password for root is 'groupoffice')
+5. Visit PHPMyAdmin at http://localhost:8001 and create the database "groupoffice". (Default password for root is 'groupoffice')
 
-7. Install Group-Office by going to http://localhost/install/. Note you should not see a page where you enter database connection details. If you see this something is wrong with the database container.
+6. Install Group-Office by going to http://localhost/install/. Note you should not see a page where you enter database connection details. If you see this something is wrong with the database container.
 
-8. Configure a cron job on the host machine so that Group Office can run scheduled tasks. 
+7. Configure a cron job on the host machine so that Group Office can run scheduled tasks. 
    On Linux create a file /etc/cron.d/groupoffice and add:
 
    ```cron
@@ -71,7 +63,7 @@ Installation
     > * * * * * /usr/local/bin/docker exec --user www-data go_web php /usr/local/share/groupoffice/cron.php
     > ```
 
-9. All done. Happy coding!
+8. All done. Happy coding!
 
 Unit testing
 ------------
@@ -138,22 +130,23 @@ docker-compose up -d
 Check the main settings page and the warning message should be gone and the
 settings will persist.
 
-Multiple branches:
-------------------
-
-Checkout new source in the "src" directory
-
+Useful commands
+---------------
+Run composer:
 ```bash
-cd src
-git clone -b 6.3.x https://github.com/Intermesh/groupoffice.git 63
+docker-compose exec -w /usr/local/src/www groupoffice composer update
 ```
 
-Run composer for the branch:
-
+Run legacy CLI commands:
 ```bash
-docker-compose run -w /root/src/63/www --rm composer install --no-dev --ignore-platform-reqs
+docker-compose exec groupoffice php ./www/groupofficecli.php -r=postfixadmin/mailbox/cacheUsage -c=/etc/groupoffice/config.php -q
 ```
 
-See dockerfile for example:
-Duplicate the go_web container and the go_data and go_etc volumes
-Change the database to groupoffice_63
+Run cron:
+```bash
+docker-compose exec groupoffice php ./www/cron.php
+```
+Import language file:
+```
+docker-compose exec groupoffice-64 php www/cli.php community/dev/Language/import --path=lang.csv
+```

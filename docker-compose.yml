@@ -1,57 +1,5 @@
-version: "3.1"
+version: "3.7"
 services:
-
-
-      # groupoffice-nginx:
-  #   container_name: go_web_nginx
-  #   #build:
-  #    # context: ./nginx
-  #   image: nginx
-  #   #restart: always
-  #   ports:
-  #     - "81:80"
-  #     - "444:443"
-  #   links:
-  #     - db
-  #     - php-fpm
-
-  #   volumes:
-  #     # Use this bind mount when not using docker-sync
-  #     # - ./src/master:/usr/local/share/src:delegated 
-      
-  #     # Use the mount below when using docker-sync
-  #     - master-sync:/usr/local/share/groupoffice:nocopy   
-  #     - ./nginx/site.conf:/etc/nginx/conf.d/default.conf        
-
-      
-
-  #     #- ./ssl:/etc/ssl/groupoffice:delegated
-  #   env_file:
-  #     - ./db.env     
-  #   environment:
-  #     XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
-  #     MYSQL_DATABASE: groupoffice-master
-      
-  #   working_dir: /usr/local/share/groupoffice
-
-  # php-fpm:
-  #   build:
-  #     context: ./php-fpm
-
-  #   links:
-  #     - db
-
-  #   volumes:
-  #     # Use the mount below when using docker-sync
-  #     - master-sync:/usr/local/share/groupoffice:nocopy           
-  #     - "godata:/var/lib/groupoffice"
-  #     #- "webgrind:/tmp/webgrind:delegated"
-  #     - "goetc:/etc/groupoffice/multi_instance"
-  #   env_file:
-  #     - ./db.env     
-  #   environment:
-  #     XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
-  #     MYSQL_DATABASE: groupoffice-master
   
   groupoffice:
     container_name: go_web
@@ -80,6 +28,7 @@ services:
       PHP_IDE_CONFIG: "serverName=localhost" #for PHPStorm path mappings in Preferences -> PHP -> Servers
 
     working_dir: /usr/local/share/src
+
   db:
     container_name: go_db
     image: mariadb
@@ -93,7 +42,7 @@ services:
 
     volumes:
       - "dbdata:/var/lib/mysql"
-      - /Users/mschering/Downloads:/root/Downloads:delegated # Useful for importing large dump files
+      - ~/Downloads:/root/Downloads:delegated # Useful for importing large dump files
       
   mailserver:
     image: intermesh/groupoffice-mailserver
@@ -113,15 +62,7 @@ services:
       POSTMASTER_EMAIL: admin@intermesh.localhost
     volumes:
       - "vmail:/var/mail/vhosts"
-      - /Users/mschering/Downloads:/root/Downloads:delegated # Useful for importing email source files
-      
-  composer:
-    image: composer
-    container_name: go_composer
-    volumes: 
-      - ./src:/src      
-    working_dir: /src/master/www
-    
+      - ~/Downloads:/root/Downloads:delegated # Useful for importing email source files
   sass:
     container_name: go_sass
     restart: always
@@ -152,6 +93,8 @@ services:
       PMA_CONTROLPORT: 3306
       PMA_CONTROLUSER: root
       PMA_CONTROLPASS: groupoffice
+
+      UPLOAD_LIMIT: 3000000000
 
     ports:
      - 8001:80

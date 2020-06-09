@@ -1,6 +1,7 @@
 #!/bin/sh
 set -e
 
+# These packages are needed apt-get install -y iproute2 host
 echo "Setting up host.docker.internal"
 
 # For supporting host.docker.internal on Linux. See https://github.com/docker/for-linux/issues/264

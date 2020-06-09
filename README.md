@@ -24,7 +24,7 @@ Installation
    git clone --recurse-submodules https://github.com/Intermesh/groupoffice-docker-development.git
    ```
 
-3. Go into src/* dfirectories and checkout the 'master' branche:
+3. Go into the source dfirectory and checkout the 'master' branch:
 
    ```bash
    cd groupoffice-docker-development/src/master

@@ -40,11 +40,9 @@ Installation
    
    Note: The first time you run it 'composer install' will run. This can take some time to complete. View the logs to see the progress.
 
-5. Visit PHPMyAdmin at http://localhost:8001 and create the database "groupoffice". (Default password for root is 'groupoffice')
+5. Install Group-Office by going to http://localhost/install/. Note you should not see a page where you enter database connection details. If you see this something is wrong with the database container.
 
-6. Install Group-Office by going to http://localhost/install/. Note you should not see a page where you enter database connection details. If you see this something is wrong with the database container.
-
-7. Configure a cron job on the host machine so that Group Office can run scheduled tasks. 
+6. Configure a cron job on the host machine so that Group Office can run scheduled tasks. 
    On Linux create a file /etc/cron.d/groupoffice and add:
 
    ```cron
@@ -63,7 +61,7 @@ Installation
     > * * * * * /usr/local/bin/docker exec --user www-data go_web php /usr/local/share/groupoffice/cron.php
     > ```
 
-8. All done. Happy coding!
+7. All done. Happy coding!
 
 Unit testing
 ------------

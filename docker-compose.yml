@@ -2,7 +2,6 @@ version: "3.7"
 services:
   
   groupoffice:
-    container_name: go_web
     build:
       context: ./groupoffice
     restart: always
@@ -30,7 +29,6 @@ services:
     working_dir: /usr/local/share/src
 
   db:
-    container_name: go_db
     image: mariadb
     restart: always   
     ports:
@@ -48,7 +46,6 @@ services:
     ## When using local builds for testing:
     #build:
     #   context: ../docker-groupoffice-mailserver
-    container_name: go_mailserver
     restart: always
     ports: 
       - "143:143"
@@ -63,7 +60,6 @@ services:
       - "vmail:/var/mail/vhosts"
       - ~/Downloads:/root/Downloads:delegated # Useful for importing email source files
   sass:
-    container_name: go_sass
     restart: always
     build:
        context: ./sass    
@@ -73,7 +69,6 @@ services:
     
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: go_phpmyadmin
     restart: always
     links: 
      - db:db
@@ -101,7 +96,6 @@ services:
   webgrind:
     ports: 
       - "8002:8080"
-    container_name: webgrind
     image: wodby/webgrind
     restart: always
     environment:

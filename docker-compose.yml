@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.6"
 services:
   
   groupoffice:
@@ -6,8 +6,8 @@ services:
       context: ./groupoffice
     restart: always
     ports:
-      - "80:80"
-      - "443:443"
+      - "8000:80"
+        # - "443:443"
     links:
       - db
 
@@ -33,9 +33,10 @@ services:
     restart: always   
     ports:
       - "8306:3306"
-
     environment:
       MYSQL_ROOT_PASSWORD: groupoffice
+    env_file:
+      - ./db.env     
 
     volumes:
       - "dbdata:/var/lib/mysql"

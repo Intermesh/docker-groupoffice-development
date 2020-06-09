@@ -1,5 +1,4 @@
-#FROM intermesh/groupoffice
-FROM d23df37a2b82
+FROM intermesh/groupoffice
 #FROM groupoffice-test
 # To test changes in intermesh/groupoffice
 # Build it with:

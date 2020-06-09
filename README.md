@@ -6,7 +6,7 @@ It will install these services:
 
 1. mariadb
 2. mailserver based on dovecot and postfix
-3. groupoffice apache web server with php 7.3, ioncube, composer and xdebug running on port 80
+3. groupoffice apache web server with php 7.3, ioncube, composer and xdebug running on port 8000
 4. phpunit for testing
 5. PhpMyAdmin running on port 8001. (see below on how to make phpmyadmin settings persist)
 6. Webgrind for performance tuning runs on port 8002. 

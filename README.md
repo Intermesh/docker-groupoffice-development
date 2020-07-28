@@ -132,7 +132,7 @@ Useful commands
 ---------------
 Run composer:
 ```bash
-docker-compose exec -w /usr/local/src/www groupoffice composer update
+docker-compose exec -w /usr/local/share/src/www groupoffice composer update
 ```
 
 Run legacy CLI commands:

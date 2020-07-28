@@ -1,11 +1,4 @@
 FROM intermesh/groupoffice
-#FROM groupoffice-test
-# To test changes in intermesh/groupoffice
-# Build it with:
-#
-# docker build -t groupoffice-test .
-#
-# and use here: FROM groupoffice-test
 
 RUN rm -rf /usr/local/share/groupoffice
 RUN ln -s /usr/local/share/src/www /usr/local/share/groupoffice

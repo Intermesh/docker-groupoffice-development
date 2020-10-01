@@ -10,7 +10,7 @@ VOLUME /usr/local/share/src
 RUN pecl install xdebug && docker-php-ext-enable xdebug
 
 # Install small text editor to make config.php changes, install wget for composer
-RUN apt-get install -y nano wget
+RUN apt-get update && apt-get install -y nano wget
 
 COPY ./etc/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 

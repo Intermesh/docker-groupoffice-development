@@ -6,15 +6,11 @@ RUN ln -s /usr/local/share/src/www /usr/local/share/groupoffice
 #Group-Office sources
 VOLUME /usr/local/share/src
 
-#beta is required for php 7.3
-RUN pecl install xdebug && docker-php-ext-enable xdebug
+
 
 # Install small text editor to make config.php changes, install wget for composer
 RUN apt-get update && apt-get install -y nano wget
 
-COPY ./etc/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-
-RUN touch /var/log/xdebug.log && chmod 666 /var/log/xdebug.log
 
 #Enable debug mode for development
 RUN sed -i "s/config\['debug'\] = false;/config\['debug'\] = true;/" /etc/groupoffice/config.php.tpl
@@ -29,6 +25,13 @@ RUN mv composer.phar /usr/local/bin/composer
 # For supporting host.docker.internal on Linux. See https://github.com/docker/for-linux/issues/264
 RUN apt-get install -y iproute2 host
 COPY docker-godev-entrypoint.sh /usr/local/bin
+
+
+#xdebug
+RUN pecl install xdebug && docker-php-ext-enable xdebug
+COPY ./etc/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN touch /var/log/xdebug.log && chmod 666 /var/log/xdebug.log
+
 
 CMD ["apache2-foreground"]
 ENTRYPOINT ["docker-godev-entrypoint.sh"]

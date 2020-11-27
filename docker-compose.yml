@@ -22,7 +22,9 @@ services:
     env_file:
       - ./db.env     
     environment:
-      XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
+      #XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
+      # for profiling set:
+      #XDEBUG_MODE: "profile"
       MYSQL_DATABASE: groupoffice
       PHP_IDE_CONFIG: "serverName=localhost" #for PHPStorm path mappings in Preferences -> PHP -> Servers
 

@@ -10,9 +10,11 @@ fi
 
 if [ -z "$2" ]
 then 
-	$2="tests"
+	P="tests"
+else
+	P=$2
 fi
 
 echo "Running test in container groupoffice$BRANCH"
 
-docker-compose exec groupoffice$BRANCH ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml $2
+docker-compose exec groupoffice$BRANCH ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml $P

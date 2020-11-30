@@ -8,6 +8,11 @@ else
 	BRANCH="-$1"
 fi
 
+if [ -z "$2" ]
+then 
+	$2="tests"
+fi
+
 echo "Running test in container groupoffice$BRANCH"
 
-docker-compose exec groupoffice$BRANCH ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml tests
+docker-compose exec groupoffice$BRANCH ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml $2

@@ -11,6 +11,9 @@ VOLUME /usr/local/share/src
 # Install small text editor to make config.php changes, install wget for composer
 RUN apt-get update && apt-get install -y nano wget
 
+RUN a2enmod expires
+COPY ./etc/apache2/mods-enabled/expires.conf /etc/apache2/mods-enabled/expires.conf
+COPY ./etc/apache2/mods-enabled/deflate.conf /etc/apache2/mods-enabled/deflate.conf
 
 #Enable debug mode for development
 RUN sed -i "s/config\['debug'\] = false;/config\['debug'\] = true;/" /etc/groupoffice/config.php.tpl

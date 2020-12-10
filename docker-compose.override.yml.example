@@ -1,0 +1,155 @@
+version: "3.6"
+services:
+  groupoffice-63:
+    build:
+      context: ./groupoffice
+    restart: always
+    ports:
+      - "63:443"
+      - "6380:80"
+    links:
+      - db
+    volumes:
+      - /Volumes/Projects/docker-groupoffice-development/src/63:/usr/local/share/src:delegated
+      - "godata_63:/var/lib/groupoffice"
+      - "webgrind:/tmp/webgrind"
+      - "goetc_63:/etc/groupoffice/multi_instance"
+      - ./groupoffice/etc/groupoffice/globalconfig.inc.php:/etc/groupoffice/globalconfig.inc.php:delegated
+    env_file:
+      - ./db.env
+    environment:
+      XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
+      MYSQL_DATABASE: groupoffice_63
+      PHP_IDE_CONFIG: "serverName=localhost" #for PHPStorm path mappings in Preferences -> PHP -> Servers
+
+    working_dir: /usr/local/share/src
+
+  groupoffice-64:
+    build:
+      context: ./groupoffice
+    restart: always
+    ports:
+      - "6443:443"
+      - "6480:80"
+      - "80:80"
+
+    links:
+      - db
+    volumes:
+      - /Volumes/Projects/docker-groupoffice-development/src/64:/usr/local/share/src:delegated
+      - "godata_64:/var/lib/groupoffice"
+      - "webgrind:/tmp/webgrind"
+      - "goetc_64:/etc/groupoffice/multi_instance"
+      - ./groupoffice/etc/groupoffice/globalconfig.inc.php:/etc/groupoffice/globalconfig.inc.php:delegated
+      - lo_config_volume:/etc/loolwsd
+    env_file:
+      - ./db.env
+    environment:
+      XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
+      MYSQL_DATABASE: groupoffice_64
+      PHP_IDE_CONFIG: "serverName=localhost" #for PHPStorm path mappings in Preferences -> PHP -> Servers
+    working_dir: /usr/local/share/src
+    
+  groupoffice-65:
+    build:
+      context: ./groupoffice
+    restart: always
+    ports:
+      - "6543:443"
+      - "6580:80"
+    links:
+      - db
+    volumes:
+      - /Volumes/Projects/docker-groupoffice-development/src/65:/usr/local/share/src:delegated
+      - "godata_65:/var/lib/groupoffice"
+      - "webgrind:/tmp/webgrind"
+      - "goetc_65:/etc/groupoffice/multi_instance"
+      - ./groupoffice/etc/groupoffice/globalconfig.inc.php:/etc/groupoffice/globalconfig.inc.php:delegated
+      - lo_config_volume:/etc/loolwsd
+    env_file:
+      - ./db.env
+    environment:
+      XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
+      MYSQL_DATABASE: groupoffice_65
+      PHP_IDE_CONFIG: "serverName=localhost" #for PHPStorm path mappings in Preferences -> PHP -> Servers
+    working_dir: /usr/local/share/src
+
+
+#  libreoffice:
+#    image: libreoffice/online:master
+#    environment:
+#      domain: (.*\.group-office\.com|host\.docker\.internal|.*\.groupoffice\.net)
+#      username: admin
+#      password: adminadmin
+#      extra_params: --o:ssl.enable=false
+#      DONT_GEN_SSL_CERT: 1
+#    volumes:
+#      - lo_config_volume:/etc/loolwsd
+#    cap_add:
+#      - MKNOD
+#    ports:
+#      - "9980:9980"
+#    restart:
+#      unless-stopped
+##    # Enable on linux and replace your IP address with your host IP
+##    extra-hosts:
+##      - "host.docker.internal:192.168.1.?"
+#
+#
+#  testopenldap:
+#    image: rroemhild/test-openldap
+#    privileged: true
+#    restart:
+#      unless-stopped
+
+#  mysql:
+#    image: mysql
+#    restart: always
+#    environment:
+#      MYSQL_ROOT_PASSWORD: groupoffice
+#    env_file:
+#      - ./db.env
+#
+#    volumes:
+#      - "mysqldata:/var/lib/mysql"
+#
+#  mysqladmin:
+#    image: phpmyadmin/phpmyadmin
+#    restart: always
+#    links:
+#      - mysql:mysql
+#    env_file:
+#      - ./db.env
+#    environment:
+#      MYSQL_ROOT_PASSWORD: groupoffice
+#
+#      PMA_HOST: mysql
+#
+#      #Auto login as root
+#      PMA_USER: root
+#      PMA_PASSWORD: groupoffice
+#
+#      # Settings for configuration storage. You must create this database manually. See README.md
+#      PMA_PMADB: phpmyadmin
+#      PMA_CONTROLHOST: mysql
+#      PMA_CONTROLPORT: 3306
+#      PMA_CONTROLUSER: root
+#      PMA_CONTROLPASS: groupoffice
+#
+#      UPLOAD_LIMIT: 3000000000
+#
+#    ports:
+#      - 8003:80
+      
+volumes:
+  lo_config_volume:
+  godata_65:
+  goetc_65:
+
+  godata_64:
+  goetc_64:
+
+  godata_63:
+  goetc_63:
+
+  mysqldata:

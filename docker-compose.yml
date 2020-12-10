@@ -109,23 +109,6 @@ services:
     volumes:
       - "webgrind:/tmp"
 
-  libreoffice:
-    image: libreoffice/online:latest
-    environment:
-      domain: (.*\.group-office\.com|host\.docker\.internal|.*\.groupoffice\.net)
-      username: admin
-      password: adminadmin
-      extra_params: --o:ssl.enable=false
-      DONT_GEN_SSL_CERT: 1
-    volumes:
-      - lo_config_volume:/etc/loolwsd
-    cap_add:
-      - MKNOD
-    ports:
-      - "9980:9980"
-    restart:
-      unless-stopped
-
 
 volumes:
   webgrind:

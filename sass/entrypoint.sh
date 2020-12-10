@@ -4,16 +4,14 @@ set -e
 echo "Looking for SASS files to watch...";
 WATCH=
 
-for line in $(find /src \( -name style.scss -o -name style-mobile.scss \));
+for line in $(find /src \( -name style.scss -o -name style-mobile.scss -o -name htmleditor.scss \));
 do
-  echo $line;
   replace1=${line/src\/style.scss/style.css};
   replace2=${replace1/src\/style-mobile.scss/style-mobile.css};
-  echo $replace2;
-	WATCH="$WATCH $line:$replace2";
+  replace3=${replace2/src\/htmleditor.scss/htmleditor.css};
+  echo $line - $replace3;
+	WATCH="$WATCH $line:$replace3";
 done
-
-echo "Found: $WATCH"
 
 sass --watch $WATCH
 

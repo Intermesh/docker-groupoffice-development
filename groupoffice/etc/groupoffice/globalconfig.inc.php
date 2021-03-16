@@ -25,4 +25,5 @@ $config = [
 //'product_name' => 'My Office',
 //'custom_css_url' => '/branding/style.css',
 //'support_link' => 'https://www.intermesh.nl'
+//'allowed_modules' => 'bookmarks,caldav,calendar,carddav,comments,cron,customcss,customfields,dav,defaultsite,demodata,documenttemplates,dropbox,email,exactonline,files,gota,hoursapproval2,leavedays,log,notes,pr2analyzer,projects2,reminders,savemailas,scanbox,search,settings,sieve,site,smime,summary,sync,syncml,tasks,tickets,timeregistration2,tools,webodf,zpushadmin,serverclient,users,groups,modules,bgsupdateprojectrate,links,googleauthenticator,imapauthenticator,ldapauthenticator,billing,assistant,business/*,community/*,calendartimetracking'
 ];

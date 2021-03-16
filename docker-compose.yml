@@ -97,7 +97,7 @@ services:
      - 8001:80
     
   webgrind:
-    ports: 
+    ports:
       - "8002:8080"
     image: wodby/webgrind
     restart: always

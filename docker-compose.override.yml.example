@@ -74,27 +74,27 @@ services:
       PHP_IDE_CONFIG: "serverName=localhost" #for PHPStorm path mappings in Preferences -> PHP -> Servers
     working_dir: /usr/local/share/src
 
+  #Discovery URL: http://host.docker.internal:9980
+  libreoffice:
+    image: libreoffice/online:master
+    environment:
+      domain: (.*\.group-office\.com|host\.docker\.internal|.*\.groupoffice\.net|172\.18\.0\.1)
+      username: admin
+      password: adminadmin
+      extra_params: --o:ssl.enable=false
+      DONT_GEN_SSL_CERT: 1
+    volumes:
+      - lo_config_volume:/etc/loolwsd
+    cap_add:
+      - MKNOD
+    ports:
+      - "9980:9980"
+    restart:
+      unless-stopped
+#    # Enable on linux and replace your IP address with your host IP
+#    extra-hosts:
+#      - "host.docker.internal:192.168.1.?"
 
-#  libreoffice:
-#    image: libreoffice/online:master
-#    environment:
-#      domain: (.*\.group-office\.com|host\.docker\.internal|.*\.groupoffice\.net)
-#      username: admin
-#      password: adminadmin
-#      extra_params: --o:ssl.enable=false
-#      DONT_GEN_SSL_CERT: 1
-#    volumes:
-#      - lo_config_volume:/etc/loolwsd
-#    cap_add:
-#      - MKNOD
-#    ports:
-#      - "9980:9980"
-#    restart:
-#      unless-stopped
-##    # Enable on linux and replace your IP address with your host IP
-##    extra-hosts:
-##      - "host.docker.internal:192.168.1.?"
-#
 #
 #  testopenldap:
 #    image: rroemhild/test-openldap
@@ -140,6 +140,7 @@ services:
 #
 #    ports:
 #      - 8003:80
+
       
 volumes:
   lo_config_volume:

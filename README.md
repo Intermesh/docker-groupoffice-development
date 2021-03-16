@@ -75,8 +75,7 @@ docker-compose exec groupoffice ./www/vendor/phpunit/phpunit/phpunit -c tests/ph
 Profiling
 ---------
 
-You can create a profile by setting the GET parameter `XDEBUG_PROFILE=1`.
-Also see the xdebug docs for more options.
+You can create a profile by setting setting XDEBUG_MODE: "profile" in the docker-compose.yml file.
 
 Debugging
 ---------
@@ -85,6 +84,11 @@ Xdebug is ready to run. You just need to setup path mappings.
 Map your local folder
  "$YOUR_INSTALL_PATH/docker-groupoffice-development/src/master" to "/usr/local/share/src" 
 in the Docker container to tell your IDE that's where the source files are on the server.
+
+XDebug doesn't auto start. I recommend using the XDebug browser extension to enable it for requests.1
+On the command line you can set the environment variable::
+
+    docker-compose exec -e XDEBUG_SESSION=1 groupoffice ./www/cli.php
 
 ### PHPStorm
 
@@ -141,10 +145,18 @@ docker-compose exec groupoffice php ./www/groupofficecli.php -r=postfixadmin/mai
 ```
 
 Run cron:
+
 ```bash
-docker-compose exec groupoffice php ./www/cron.php
+docker-compose exec --user www-data groupoffice php ./www/cron.php
 ```
+
 Import language file:
+
 ```
 docker-compose exec groupoffice-64 php www/cli.php community/dev/Language/import --path=lang.csv
+```
+
+Upgrade:
+```
+docker-compose exec -u www-data groupoffice ./www/cli.php core/System/upgrade
 ```

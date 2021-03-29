@@ -95,6 +95,48 @@ services:
 #    extra-hosts:
 #      - "host.docker.internal:192.168.1.?"
 
+
+#  phpmyadmin:
+#    image: phpmyadmin/phpmyadmin
+#    restart: always
+#    links:
+#     - db:db
+#    env_file:
+#      - ./db.env
+#    environment:
+#      MYSQL_ROOT_PASSWORD: groupoffice
+#
+#      #Auto login as root
+#      PMA_USER: root
+#      PMA_PASSWORD: groupoffice
+#
+#      # Settings for configuration storage. You must create this database manually. See README.md
+#      PMA_PMADB: phpmyadmin
+#      PMA_CONTROLHOST: db
+#      PMA_CONTROLPORT: 3306
+#      PMA_CONTROLUSER: root
+#      PMA_CONTROLPASS: groupoffice
+#
+#      UPLOAD_LIMIT: 3000000000
+#
+#    ports:
+#     - 8001:80
+
+
+
+#  webgrind:
+#    ports:
+#      - "8002:8080"
+#    image: wodby/webgrind
+#    restart: always
+#    environment:
+#      WEBGRIND_PROFILER_DIR: /tmp
+#      WEBGRIND_STORAGE_DIR: /tmp
+#      PHP_MAX_EXECUTION_TIME: 1200,
+#      WEBGRIND_DEFAULT_TIMEZONE: Europe/Amsterdam
+#    volumes:
+#      - "webgrind:/tmp"
+
 #
 #  testopenldap:
 #    image: rroemhild/test-openldap

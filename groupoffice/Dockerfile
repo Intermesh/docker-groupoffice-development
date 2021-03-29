@@ -7,9 +7,8 @@ RUN ln -s /usr/local/share/src/www /usr/local/share/groupoffice
 VOLUME /usr/local/share/src
 
 
-
-# Install small text editor to make config.php changes, install wget for composer
-RUN apt-get update && apt-get install -y nano wget
+# Install small text editor to make config.php changes, install wget for composer, gcc for building xdebug
+RUN apt-get update && apt-get install -y nano wget iproute2 host gcc
 
 RUN a2enmod expires
 COPY ./etc/apache2/mods-enabled/expires.conf /etc/apache2/mods-enabled/expires.conf
@@ -25,8 +24,7 @@ RUN chmod 700 /usr/local/sbin/install-composer.sh
 RUN /usr/local/sbin/install-composer.sh
 RUN mv composer.phar /usr/local/bin/composer
 
-# For supporting host.docker.internal on Linux. See https://github.com/docker/for-linux/issues/264
-RUN apt-get install -y iproute2 host
+# For supporting host.docker.internal on Linux. See https://github.com/docker/for-linux/issues/264 (uses pkg iproute2 host)
 COPY docker-godev-entrypoint.sh /usr/local/bin
 
 
@@ -35,15 +33,9 @@ RUN pecl install xdebug && docker-php-ext-enable xdebug
 COPY ./etc/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN touch /var/log/xdebug.log && chmod 666 /var/log/xdebug.log
 
+#cleanup
+RUN apt purge -y --autoremove wget gcc && rm -rf /var/lib/apt/lists/*
 
 CMD ["apache2-foreground"]
 ENTRYPOINT ["docker-godev-entrypoint.sh"]
 
-#webgrind
-# ADD https://github.com/jokkedk/webgrind/archive/v1.6.1.tar.gz /tmp
-
-
-# RUN tar xvzfC /tmp/v1.6.1.tar.gz /tmp/ \
-#     && mv /tmp/webgrind-1.6.1 /usr/local/share/webgrind
-
-# COPY ./etc/apache2/conf-enabled/webgrind.conf /etc/apache2/conf-enabled/webgrind.conf

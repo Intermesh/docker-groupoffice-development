@@ -6,11 +6,9 @@ It will install these services:
 
 1. mariadb
 2. mailserver based on dovecot and postfix
-3. groupoffice apache web server with php 7.3, ioncube, composer and xdebug running on port 8000
+3. groupoffice apache web server with php 7.3, ioncube, composer and xdebug running on port 8080
 4. phpunit for testing
-5. PhpMyAdmin running on port 8001. (see below on how to make phpmyadmin settings persist)
-6. Webgrind for performance tuning runs on port 8002. 
-7. sass container that will watch and compile sass files for you.
+5. sass container that will watch and compile sass files for you.
 
 Installation
 ------------
@@ -40,7 +38,7 @@ Installation
    
    Note: The first time you run it 'composer install' will run. This can take some time to complete. View the logs to see the progress.
 
-5. Install Group-Office by going to http://localhost/install/. Note you should not see a page where you enter database connection details. If you see this something is wrong with the database container.
+5. Install Group-Office by going to http://localhost:8080/install/. Note you should not see a page where you enter database connection details. If you see this something is wrong with the database container.
 
 6. Configure a cron job on the host machine so that Group Office can run scheduled tasks. 
    On Linux create a file /etc/cron.d/groupoffice and add:
@@ -71,6 +69,8 @@ Unit testing
 ```bash
 docker-compose exec groupoffice ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml tests
 ```
+
+See below for debugging too.
 
 Profiling
 ---------
@@ -105,32 +105,6 @@ If you'd like to open a shell inside the container then you can run:
 ```bash
 docker-compose exec groupoffice bash
 ```
-
-PhpMyAdmin
-----------
-
-PhpMyAdmin runs on localhost:8001 by default. But it has no place to store it's
-settings yet. You can fix that by running:
-
-```sh
-# in host (login to the correct docker container)
-docker exec -it --user root go_phpmyadmin sh
-# in container
-apt-get update # update the package database
-apt-get install mariadb-client # get a mysql client for running sql
-mysql -u root -pgroupoffice -h db < sql/create_tables.sql # create the database
-exit
-```
-
-Now recreate the containers on the host:
-
-```bash
-docker-compose down
-docker-compose up -d
-```
-
-Check the main settings page and the warning message should be gone and the
-settings will persist.
 
 Useful commands
 ---------------

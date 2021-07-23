@@ -96,6 +96,21 @@ services:
 #      - "host.docker.internal:192.168.1.?"
 
 
+  onlyoffice:
+    image: onlyoffice/documentserver
+    ports:
+      - "9080:80"
+    restart:
+      unless-stopped
+    extra_hosts:
+      host.docker.internal: host-gateway
+    environment:
+      # Uncomment strings below to enable the JSON Web Token validation.
+      #- JWT_ENABLED=true
+      #- JWT_SECRET=s3cr3t
+      #- JWT_HEADER=Authorization
+      #- JWT_IN_BODY=true
+
 #  phpmyadmin:
 #    image: phpmyadmin/phpmyadmin
 #    restart: always

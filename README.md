@@ -76,6 +76,7 @@ Profiling
 ---------
 
 You can create a profile by setting setting XDEBUG_MODE: "profile" in the docker-compose.yml file.
+And create a bind mound: "./profile:/tmp/profile:delegated" to access the profile data.
 
 Debugging
 ---------
@@ -110,7 +111,7 @@ Useful commands
 ---------------
 Run composer:
 ```bash
-docker-compose exec -w /usr/local/share/src/www groupoffice composer update
+docker-compose exec -w /usr/local/share/src/www groupoffice composer update -a
 ```
 
 Run legacy CLI commands:
@@ -127,7 +128,7 @@ docker-compose exec --user www-data groupoffice php ./www/cron.php
 Import language file:
 
 ```
-docker-compose exec groupoffice-64 php www/cli.php community/dev/Language/import --path=lang.csv
+docker-compose exec groupoffice php www/cli.php community/dev/Language/import --path=lang.csv
 ```
 
 Upgrade:

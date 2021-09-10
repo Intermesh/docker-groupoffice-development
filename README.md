@@ -111,7 +111,7 @@ Useful commands
 ---------------
 Run composer:
 ```bash
-docker-compose exec -w /usr/local/share/src/www groupoffice composer update -a
+docker-compose exec -w /usr/local/share/src/www groupoffice composer update -o
 ```
 
 Run legacy CLI commands:

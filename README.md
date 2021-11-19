@@ -41,10 +41,10 @@ Installation
 5. Install Group-Office by going to http://localhost:8080/install/. Note you should not see a page where you enter database connection details. If you see this something is wrong with the database container.
 
 6. Configure a cron job on the host machine so that Group Office can run scheduled tasks. 
-   On Linux create a file /etc/cron.d/groupoffice and add:
+   On Linux create a file /etc/cron.d/groupoffice and add (replace "/PATH/TO/docker-groupoffice-development"):
 
    ```cron
-   * * * * * root docker exec --user www-data go_web php /usr/local/share/groupoffice/cron.php
+   * * * * * root cd /PATH/TO/docker-groupoffice-development && docker-compose exec -T groupoffice php /usr/local/share/groupoffice/cron.php
    ```
 
     > On MacOS I ran on the terminal:
@@ -56,7 +56,7 @@ Installation
     > And added:
     >
     > ```bash
-    > * * * * * /usr/local/bin/docker exec --user www-data go_web php /usr/local/share/groupoffice/cron.php
+    > * * * * * cd /PATH/TO/docker-groupoffice-development && docker-compose exec -T groupoffice php /usr/local/share/groupoffice/cron.php
     > ```
 
 7. All done. Happy coding!

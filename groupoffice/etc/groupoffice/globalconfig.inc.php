@@ -23,11 +23,8 @@ $config = [
         'serverclient_smtp_username' => '',
         'serverclient_smtp_password' => '',
 
-	'core' => [
-//		'license' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJob3N0bmFtZSI6IiouZ3JvdXAtb2ZmaWNlLmNvbSxob3N0LmRvY2tlci5pbnRlcm5hbCIsInZlcnNpb24iOiI2LjUiLCJsaWNlbnNlcyI6eyJncm91cG9mZmljZS1wcm8iOnsiZXhwaXJlc0F0IjpudWxsfX19.NQz07VqG2i_eRSEClrxNRIJuMu9WQD7je1u48khM8BQ'
-	]
 //'product_name' => 'My Office',
 //'custom_css_url' => '/branding/style.css',
 //'support_link' => 'https://www.intermesh.nl'
-//'allowed_modules' => 'bookmarks,caldav,calendar,carddav,comments,cron,customcss,customfields,dav,defaultsite,demodata,documenttemplates,dropbox,email,exactonline,files,gota,hoursapproval2,leavedays,log,notes,pr2analyzer,projects2,reminders,savemailas,scanbox,search,settings,sieve,site,smime,summary,sync,syncml,tasks,tickets,timeregistration2,tools,webodf,zpushadmin,serverclient,users,groups,modules,bgsupdateprojectrate,links,googleauthenticator,imapauthenticator,ldapauthenticator,billing,assistant,business/*,community/*,calendartimetracking'
+//'allowed_modules' => 'bookmarks,caldav,calendar,carddav,comments,cron,dav,demodata,documenttemplates,dropbox,email,exactonline,files,gota,hoursapproval2,leavedays,log,notes,pr2analyzer,projects2,reminders,savemailas,scanbox,search,settings,sieve,site,smime,summary,sync,syncml,tasks,tickets,timeregistration2,tools,webodf,zpushadmin,serverclient,users,groups,modules,bgsupdateprojectrate,links,googleauthenticator,imapauthenticator,ldapauthenticator,billing,assistant,business/*,community/*,calendartimetracking'
 ];

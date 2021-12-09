@@ -13,9 +13,9 @@ services:
 
     volumes:
       - ./src/master:/usr/local/share/src:delegated 
-      - "godata:/var/lib/groupoffice"
-      #- "./profile:/tmp/profile:delegated"
-      - "goetc:/etc/groupoffice/multi_instance"
+      - godata:/var/lib/groupoffice:delegated
+      #- ./profile:/tmp/profile:delegated
+      - goetc:/etc/groupoffice/multi_instance:delegated
       - ./groupoffice/etc/groupoffice/globalconfig.inc.php:/etc/groupoffice/globalconfig.inc.php:delegated
 
       #- ./ssl:/etc/ssl/groupoffice:delegated
@@ -41,7 +41,7 @@ services:
       - ./db.env     
 
     volumes:
-      - "dbdata:/var/lib/mysql"
+      - dbdata:/var/lib/mysql:delegated
       - ~/Downloads:/root/Downloads:delegated # Useful for importing large dump files
       
   mailserver:
@@ -60,7 +60,7 @@ services:
     environment:
       POSTMASTER_EMAIL: admin@intermesh.localhost
     volumes:
-      - "vmail:/var/mail/vhosts"
+      - vmail:/var/mail/vhosts:delegated
       - ~/Downloads:/root/Downloads:delegated # Useful for importing email source files
 
   sass:

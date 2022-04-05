@@ -62,7 +62,7 @@ services:
       - vmail:/var/mail/vhosts:delegated
       - ~/Downloads:/root/Downloads:delegated # Useful for importing email source files
     depends_on:
-       - "db"
+      - "db"
   sass:
     restart: always
     build:

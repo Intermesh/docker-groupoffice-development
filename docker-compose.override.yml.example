@@ -1,5 +1,12 @@
 version: "3.6"
 services:
+  groupoffice:
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      MYSQL_DATABASE: groupoffice
+
   groupoffice-63:
     build:
       context: ./groupoffice

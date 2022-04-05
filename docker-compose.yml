@@ -7,9 +7,8 @@ services:
     restart: always
     ports:
       - "8080:80"
-        # - "443:443"
-    links:
-      - db
+    depends_on:
+      - "db"
 
     volumes:
       - ./src/master:/usr/local/share/src:delegated 
@@ -62,7 +61,8 @@ services:
     volumes:
       - vmail:/var/mail/vhosts:delegated
       - ~/Downloads:/root/Downloads:delegated # Useful for importing email source files
-
+    depends_on:
+       - "db"
   sass:
     restart: always
     build:

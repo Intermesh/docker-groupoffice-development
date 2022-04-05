@@ -18,5 +18,5 @@ fi
 echo "Running test in container groupoffice$BRANCH"
 
 
-#docker-compose exec -e XDEBUG_SESSION=1 groupoffice$BRANCH ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml $P
-docker-compose exec groupoffice$BRANCH ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml $P
+docker-compose exec -e XDEBUG_SESSION=1 groupoffice$BRANCH ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml $P
+#docker-compose exec groupoffice$BRANCH ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml $P

@@ -4,7 +4,7 @@ set -e
 echo "Looking for SASS files to watch...";
 WATCH=
 
-for line in $(find /src \( -name style.scss -o -name style-mobile.scss -o -name htmleditor.scss \));
+for line in $(find /src \( -name style.scss -o -name style-mobile.scss -o -name htmleditor.scss \)  -not -path '*/goui/*' );
 do
   replace1=${line/src\/style.scss/style.css};
   replace2=${replace1/src\/style-mobile.scss/style-mobile.css};

@@ -6,6 +6,8 @@ services:
       - "443:443"
     environment:
       MYSQL_DATABASE: groupoffice
+      # for profiling set and enable the bind mount above:
+      #XDEBUG_MODE: "profile"
 
   groupoffice-63:
     build:
@@ -19,13 +21,11 @@ services:
     volumes:
       - /Volumes/Projects/docker-groupoffice-development/src/63:/usr/local/share/src:delegated
       - "godata_63:/var/lib/groupoffice"
-      - "webgrind:/tmp/webgrind"
       - "goetc_63:/etc/groupoffice/multi_instance"
       - ./groupoffice/etc/groupoffice/globalconfig.inc.php:/etc/groupoffice/globalconfig.inc.php:delegated
     env_file:
       - ./db.env
     environment:
-      XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
       MYSQL_DATABASE: groupoffice_63
       PHP_IDE_CONFIG: "serverName=localhost" #for PHPStorm path mappings in Preferences -> PHP -> Servers
 

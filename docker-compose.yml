@@ -13,10 +13,10 @@ services:
     volumes:
       - ./src/master:/usr/local/share/src:delegated 
       - godata:/var/lib/groupoffice:delegated
-      #- ./profile:/tmp/profile:delegated
+      - ./profile:/tmp/profile:delegated
       - goetc:/etc/groupoffice/multi_instance:delegated
       - ./groupoffice/etc/groupoffice/globalconfig.inc.php:/etc/groupoffice/globalconfig.inc.php:delegated
-
+      - ~/Downloads:/root/Downloads
       #- ./ssl:/etc/ssl/groupoffice:delegated
     env_file:
       - ./db.env     
@@ -63,11 +63,18 @@ services:
       - ~/Downloads:/root/Downloads:delegated # Useful for importing email source files
     depends_on:
       - "db"
+#      - "solr"
+
+#  solr:
+#    image: solr
+#    ports:
+#      - "8983:8983"
+
   sass:
     restart: always
     build:
-       context: ./sass    
-    volumes: 
+       context: ./sass
+    volumes:
       - ./src:/src
     working_dir: /src
 

@@ -3,9 +3,9 @@ set -e
 
 if [ -z "$1" ] 
 then
-	BRANCH=""
+	CONT="groupoffice"
 else
-	BRANCH="-$1"
+	CONT=$1
 fi
 
 if [ -z "$2" ]
@@ -16,7 +16,9 @@ else
 fi
 
 echo "Running test in container groupoffice$BRANCH"
-
-
 #docker-compose exec -u www-data -e XDEBUG_SESSION=1 groupoffice$BRANCH ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml $P
-docker-compose exec -u www-data groupoffice$BRANCH ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml $P
+docker-compose exec -u www-data $CONT ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml $P
+
+
+echo "Running again but with database upgrade"
+docker-compose exec -u www-data $CONT ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml --bootstrap="tests/bootstrap-upgrade.php" $P

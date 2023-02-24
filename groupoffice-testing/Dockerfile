@@ -1,4 +1,4 @@
-FROM intermesh/groupoffice:latest
+FROM intermesh/groupoffice:testing
 
 RUN rm -rf /usr/local/share/groupoffice
 RUN ln -s /usr/local/share/src/www /usr/local/share/groupoffice
@@ -29,7 +29,7 @@ COPY docker-godev-entrypoint.sh /usr/local/bin
 
 
 #xdebug
-RUN pecl install xdebug-3.1.6 && docker-php-ext-enable xdebug
+RUN pecl install xdebug && docker-php-ext-enable xdebug
 COPY ./etc/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN touch /var/log/xdebug.log && chmod 666 /var/log/xdebug.log
 

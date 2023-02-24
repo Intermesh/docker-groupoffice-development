@@ -22,6 +22,7 @@ $config = [
         'serverclient_smtp_encryption' =>'',
         'serverclient_smtp_username' => '',
         'serverclient_smtp_password' => '',
+'business' => ['onlyoffice' => ['documentServerUrl'=>'http://test.nl']],
 //'product_name' => 'My Office',
 //'custom_css_url' => '/branding/style.css',
 //'support_link' => 'https://www.intermesh.nl'

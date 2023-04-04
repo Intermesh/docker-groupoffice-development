@@ -9,9 +9,10 @@ do
   replace1=${line/src\/style.scss/style.css};
   replace2=${replace1/src\/style-mobile.scss/style-mobile.css};
   replace3=${replace2/src\/htmleditor.scss/htmleditor.css};
-  echo $line - $replace3;
 	WATCH="$WATCH $line:$replace3";
 done
 
-sass --watch $WATCH
+echo Watching: "$WATCH"
+
+/opt/dart-sass/sass --watch $WATCH
 

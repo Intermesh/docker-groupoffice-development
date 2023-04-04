@@ -37,6 +37,7 @@ services:
       - "8306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: groupoffice
+      MARIADB_AUTO_UPGRADE: true
     env_file:
       - ./db.env     
 

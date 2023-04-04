@@ -12,6 +12,7 @@ services:
   groupoffice-63:
     build:
       context: ./groupoffice
+      dockerfile: sixsix.Dockerfile
     restart: always
     ports:
       - "63:443"
@@ -34,6 +35,7 @@ services:
   groupoffice-64:
     build:
       context: ./groupoffice
+      dockerfile: sixsix.Dockerfile
     restart: always
     ports:
       - "6443:443"
@@ -60,6 +62,7 @@ services:
   groupoffice-65:
     build:
       context: ./groupoffice
+      dockerfile: sixsix.Dockerfile
     restart: always
     ports:
       - "6543:443"

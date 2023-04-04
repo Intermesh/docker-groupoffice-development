@@ -1,4 +1,4 @@
-FROM intermesh/groupoffice:latest
+FROM intermesh/groupoffice:6.6
 
 RUN rm -rf /usr/local/share/groupoffice
 RUN ln -s /usr/local/share/src/www /usr/local/share/groupoffice

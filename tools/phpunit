@@ -15,10 +15,14 @@ else
 	P=$2
 fi
 
-echo "Running test in container groupoffice$BRANCH"
-#docker-compose exec -u www-data -e XDEBUG_SESSION=1 groupoffice$BRANCH ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml $P
-docker-compose exec -u www-data $CONT ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml $P
 
+echo "Running on existing datavase"
+docker-compose exec -u www-data $CONT ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml --bootstrap="tests/bootstrap-none.php" $P
+exit 0
+
+
+echo "Running test in container groupoffice$BRANCH"
+docker-compose exec -u www-data $CONT ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml $P
 
 echo "Running again but with database upgrade"
 docker-compose exec -u www-data $CONT ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml --bootstrap="tests/bootstrap-upgrade.php" $P

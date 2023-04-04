@@ -2,7 +2,7 @@
 
 $config = [
         // GO will connect to this installation to add a mailbox. It is the full url to the Group-Office installation with the postfixadmin module installed.
-        'serverclient_server_url' => 'http://groupoffice/',
+        //'serverclient_server_url' => 'http://groupoffice/',
         // A token to authenticate. The token has to be identical on the web and mail server. By default they are the same server so you can just set anything here.
 
         'serverclient_token' => 'someSecureTokenOfyourChoice',

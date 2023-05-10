@@ -16,9 +16,9 @@ else
 fi
 
 
-echo "Running on existing datavase"
-docker-compose exec -u www-data $CONT ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml --bootstrap="tests/bootstrap-none.php" $P
-exit 0
+#echo "Running on existing database"
+#docker-compose exec -u www-data $CONT ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml --bootstrap="tests/bootstrap-none.php" $P
+#exit 0
 
 
 echo "Running test in container groupoffice$BRANCH"

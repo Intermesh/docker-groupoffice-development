@@ -1,4 +1,4 @@
-FROM google/dart
+FROM dart
 
 ARG DART_SASS_VERSION=1.60.0
 ARG DART_SASS_TAR=dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz

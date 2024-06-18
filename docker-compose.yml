@@ -1,4 +1,3 @@
-version: "3.6"
 services:
   
   groupoffice:
@@ -46,7 +45,7 @@ services:
       - ~/Downloads:/root/Downloads:delegated # Useful for importing large dump files
       
   mailserver:
-    image: intermesh/groupoffice-mailserver
+    image: intermesh/groupoffice-mailserver:latest
     ## When using local builds for testing:
     #build:
     #   context: ../docker-groupoffice-mailserver

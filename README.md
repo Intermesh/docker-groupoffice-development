@@ -13,7 +13,7 @@ It will install these services:
 Installation
 ------------
 
-1. Make sure docker and docker-compose are installed.
+1. Make sure docker is installed.
 
 
 2. Clone this repository:
@@ -33,7 +33,7 @@ Installation
 4. Run the stack:
 
    ```bash
-   docker-compose up -d
+   docker compose up -d
    ```
    
    Note: The first time you run it 'composer install' will run. This can take some time to complete. View the logs to see the progress.
@@ -44,7 +44,7 @@ Installation
    On Linux create a file /etc/cron.d/groupoffice and add (replace "/PATH/TO/docker-groupoffice-development"):
 
    ```cron
-   * * * * * root cd /PATH/TO/docker-groupoffice-development && docker-compose exec -T groupoffice php /usr/local/share/groupoffice/cron.php
+   * * * * * root cd /PATH/TO/docker-groupoffice-development && docker compose exec -T groupoffice php /usr/local/share/groupoffice/cron.php
    ```
 
     > On MacOS I ran on the terminal:
@@ -56,7 +56,7 @@ Installation
     > And added:
     >
     > ```bash
-    > * * * * * cd /PATH/TO/docker-groupoffice-development && docker-compose exec -T groupoffice php /usr/local/share/groupoffice/cron.php
+    > * * * * * cd /PATH/TO/docker-groupoffice-development && docker compose exec -T groupoffice php /usr/local/share/groupoffice/cron.php
     > ```
 
 7. All done. Happy coding!
@@ -67,7 +67,7 @@ Unit testing
 > **WARNING**: This will destroy and recreate database called "groupoffice_phpunit".
 
 ```bash
-docker-compose exec groupoffice ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml tests
+docker compose exec groupoffice ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml tests
 ```
 
 See below for debugging too.
@@ -75,7 +75,7 @@ See below for debugging too.
 Profiling
 ---------
 
-You can create a profile by setting setting XDEBUG_MODE: "profile" in the docker-compose.yml file.
+You can create a profile by setting setting XDEBUG_MODE: "profile" in the docker compose.yml file.
 And create a bind mound: "./profile:/tmp/profile:delegated" to access the profile data.
 
 Debugging
@@ -89,11 +89,11 @@ in the Docker container to tell your IDE that's where the source files are on th
 XDebug doesn't auto start. I recommend using the XDebug browser extension to enable it for requests.1
 On the command line you can set the environment variable::
 
-    docker-compose exec -e XDEBUG_SESSION=1 groupoffice ./www/cli.php
+    docker compose exec -e XDEBUG_SESSION=1 groupoffice ./www/cli.php
 
 ### PHPStorm
 
-For PHPStorm debugging on the command line make sure you set mappings for "localhost" at Settings -> Languages & Frameworks -> PHP -> Servers. Because we set the 'PHP_IDE_CONFIG' environment vairable to "localhost" in docker-compose.yml.
+For PHPStorm debugging on the command line make sure you set mappings for "localhost" at Settings -> Languages & Frameworks -> PHP -> Servers. Because we set the 'PHP_IDE_CONFIG' environment vairable to "localhost" in docker compose.yml.
 
 See also:
 https://www.jetbrains.com/help/phpstorm/zero-configuration-debugging-cli.html#6e577196
@@ -104,34 +104,34 @@ Open shell
 If you'd like to open a shell inside the container then you can run:
 
 ```bash
-docker-compose exec groupoffice bash
+docker compose exec groupoffice bash
 ```
 
 Useful commands
 ---------------
 Run composer:
 ```bash
-docker-compose exec -w /usr/local/share/src/www groupoffice composer update -o
+docker compose exec -w /usr/local/share/src/www groupoffice composer update -o
 ```
 
 Run legacy CLI commands:
 ```bash
-docker-compose exec groupoffice php ./www/groupofficecli.php -r=postfixadmin/mailbox/cacheUsage -c=/etc/groupoffice/config.php -q
+docker compose exec groupoffice php ./www/groupofficecli.php -r=postfixadmin/mailbox/cacheUsage -c=/etc/groupoffice/config.php -q
 ```
 
 Run cron:
 
 ```bash
-docker-compose exec --user www-data groupoffice php ./www/cron.php
+docker compose exec --user www-data groupoffice php ./www/cron.php
 ```
 
 Import language file:
 
 ```
-docker-compose exec groupoffice php www/cli.php community/dev/Language/import --path=lang.csv
+docker compose exec groupoffice php www/cli.php community/dev/Language/import --path=lang.csv
 ```
 
 Upgrade:
 ```
-docker-compose exec -u www-data groupoffice ./www/cli.php core/System/upgrade
+docker compose exec -u www-data groupoffice ./www/cli.php core/System/upgrade
 ```

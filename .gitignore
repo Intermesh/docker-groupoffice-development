@@ -5,7 +5,7 @@
 .docker-sync
 ssl
 .idea
-docker-compose.override.yml
+compose.override.yml
 src/*
 !src/master
 

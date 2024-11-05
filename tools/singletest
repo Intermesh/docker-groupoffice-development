@@ -1,0 +1,2 @@
+#!/bin/bash
+docker-compose exec -e XDEBUG_SESSION=1 -u www-data groupoffice ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml --bootstrap="tests/bootstrap-none.php" tests/$1

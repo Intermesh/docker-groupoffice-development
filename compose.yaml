@@ -30,7 +30,7 @@ services:
     working_dir: /usr/local/share/src
 
   db:
-    image: mariadb:10.3 # Version Debian bookworm uses
+    image: mariadb:11.5.2
     restart: always   
     ports:
       - "8306:3306"

@@ -1,3 +1,4 @@
 [submodule "src/master"]
 	path = src/master
 	url = https://github.com/Intermesh/groupoffice.git
+	branch = master

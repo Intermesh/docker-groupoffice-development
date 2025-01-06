@@ -8,7 +8,7 @@ $config = [
         'serverclient_token' => 'someSecureTokenOfyourChoice',
 
         // Comma separated list of mailbox domains
-        'serverclient_domains' => 'intermesh.localhost',
+        'serverclient_domains' => 'intermesh.localhost,planetexpress.com',
 
         // The email account properties that will be added for the user
         'serverclient_mbroot' => '',

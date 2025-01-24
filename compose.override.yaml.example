@@ -208,6 +208,19 @@ services:
 #    ports:
 #      - 8003:80
 
+# Can be used for automatic translations
+
+#  libretranslate:
+#    image: libretranslate/libretranslate
+#    command: --load-only en,nl --port 5010 --threads 8
+#    tty: true
+#    restart:
+#      unless-stopped
+#    ports:
+#      - 5010:5010
+#    volumes:
+#      - lt-local:/home/libretranslate/.local
+
       
 volumes:
   lo_config_volume:

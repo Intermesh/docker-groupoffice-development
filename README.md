@@ -6,9 +6,10 @@ It will install these services:
 
 1. mariadb
 2. mailserver based on dovecot and postfix
-3. groupoffice apache web server with php 7.3, ioncube, composer and xdebug running on port 8080
+3. groupoffice Apache web server with PHP, Composer and xdebug running on port 8080
 4. phpunit for testing
 5. sass container that will watch and compile sass files for you.
+6. Libretranslate to help translators with machine translations.
 
 Installation
 ------------
@@ -106,8 +107,6 @@ If you'd like to open a shell inside the container then you can run:
 ```bash
 docker compose exec groupoffice bash
 ```
-
-
 
 Translating
 -----------

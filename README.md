@@ -107,6 +107,24 @@ If you'd like to open a shell inside the container then you can run:
 docker compose exec groupoffice bash
 ```
 
+
+
+Translating
+-----------
+Make sure the development tools module is installed.
+
+Run this command to export language. LibreTranslate runs locally and
+will be used to machine translate the missing string:
+
+```
+docker compose exec groupoffice php www/cli.php community/dev/Language/export --language=nl --translate --missingOnly | tee nl-missing.csv
+```
+
+Import language file:
+```
+docker compose exec groupoffice php www/cli.php community/dev/Language/import --path=lang.csv
+```
+
 Useful commands
 ---------------
 Run composer:
@@ -123,12 +141,6 @@ Run cron:
 
 ```bash
 docker compose exec --user www-data groupoffice php ./www/cron.php
-```
-
-Import language file:
-
-```
-docker compose exec groupoffice php www/cli.php community/dev/Language/import --path=lang.csv
 ```
 
 Upgrade:

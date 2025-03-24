@@ -3,7 +3,7 @@ services:
   groupoffice:
     build:
       context: ./groupoffice
-      dockerfile: sixeight.Dockerfile
+      dockerfile: twentyfivezero.Dockerfile
     restart: always
     ports:
       - "8080:80"

@@ -126,6 +126,12 @@ docker compose exec groupoffice php www/cli.php community/dev/Language/import --
 
 Useful commands
 ---------------
+
+Build SASS, GOUI Typescript modules and install composer packages:
+```bash
+docker compose exec groupoffice ./scripts/build.sh
+```
+
 Run composer:
 ```bash
 docker compose exec -w /usr/local/share/src/www groupoffice composer update -o

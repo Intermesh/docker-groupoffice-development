@@ -101,10 +101,8 @@ services:
       - "9980:9980"
     restart:
       unless-stopped
-#    # Enable on linux and replace your IP address with your host IP
-#    extra-hosts:
-#      - "host.docker.internal:192.168.1.?"
-
+    extra_hosts:
+      - host.docker.internal:host-gateway
 
   # Use http://host.docker.internal:9080 in Group-Office as OnlyOffice server URL
   # only works when accessing GO on host.docker.internal

@@ -83,7 +83,8 @@ services:
       PHP_IDE_CONFIG: "serverName=localhost" #for PHPStorm path mappings in Preferences -> PHP -> Servers
     working_dir: /usr/local/share/src
 
-  #Discovery URL: http://host.docker.internal:9980
+  # Discovery URL: http://host.docker.internal:9980
+  # On Linux you have to add host.docker.internal to /etc/hosts
   libreoffice:
     image: libreoffice/online:master
     environment:
@@ -105,6 +106,9 @@ services:
 #      - "host.docker.internal:192.168.1.?"
 
 
+  # Use http://host.docker.internal:9080 in Group-Office as OnlyOffice server URL
+  # only works when accessing GO on host.docker.internal
+  # On Linux you have to add host.docker.internal to /etc/hosts
   onlyoffice:
     image: onlyoffice/documentserver
     ports:

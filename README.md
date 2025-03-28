@@ -152,3 +152,32 @@ Upgrade:
 ```
 docker compose exec -u www-data groupoffice ./www/cli.php core/System/upgrade
 ```
+
+
+Database access
+---------------
+You can connect from the host at port 8306 by default.
+
+To enter the mariaDB container run:
+
+```shell
+docker compose exec db bash
+```
+
+Login to the mariadb server as root:
+
+```shell
+mariadb -u root -p
+```
+
+To ease development you can login without a password if you run this query:
+
+```sql
+grant all privileges on *.* to root@localhost identified via unix_socket;
+```
+
+Now you can enter the mariadb server by running:
+
+```shell
+docker compose exec db mariadb
+```

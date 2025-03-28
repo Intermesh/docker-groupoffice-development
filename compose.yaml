@@ -79,21 +79,6 @@ services:
       - ./src:/src
     working_dir: /src
 
-  # Used for translators
-  # docker compose exec groupoffice php www/cli.php community/dev/Language/export --language=nl --translate --missingOnly
-  libretranslate:
-    image: libretranslate/libretranslate
-    # To force model update
-    #command: --load-only en,nl,de,fr,es --port 5010 --threads 8 --update-models
-    command: --load-only en,nl,de,fr,es --port 5010 --threads 16
-    tty: true
-    restart:
-      unless-stopped
-    ports:
-      - 5010:5010
-    volumes:
-      - lt-local:/home/libretranslate/.local
-
 volumes:
   godata:
   goetc:

@@ -28,6 +28,8 @@ services:
       PHP_IDE_CONFIG: "serverName=localhost" #for PHPStorm path mappings in Preferences -> PHP -> Servers
 
     working_dir: /usr/local/share/src
+    extra_hosts:
+      - host.docker.internal:host-gateway
 
   db:
     image: mariadb:11.5.2

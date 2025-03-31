@@ -8,80 +8,32 @@ services:
       # for profiling set and enable the bind mount above:
       #XDEBUG_MODE: "profile"
 
-  groupoffice-63:
+  groupoffice-68:
     build:
       context: ./groupoffice
       dockerfile: sixsix.Dockerfile
     restart: always
     ports:
-      - "63:443"
-      - "6380:80"
+      - "68:443"
+      - "6880:80"
     links:
       - db
     volumes:
       - /Volumes/Projects/docker-groupoffice-development/src/63:/usr/local/share/src:delegated
-      - "godata_63:/var/lib/groupoffice"
-      - "goetc_63:/etc/groupoffice/multi_instance"
+      - "godata_68:/var/lib/groupoffice"
+      - "goetc_68:/etc/groupoffice/multi_instance"
       - ./groupoffice/etc/groupoffice/globalconfig.inc.php:/etc/groupoffice/globalconfig.inc.php:delegated
     env_file:
       - ./db.env
     environment:
-      MYSQL_DATABASE: groupoffice_63
+      MYSQL_DATABASE: groupoffice_68
       PHP_IDE_CONFIG: "serverName=localhost" #for PHPStorm path mappings in Preferences -> PHP -> Servers
 
     working_dir: /usr/local/share/src
+    extra_hosts:
+      - host.docker.internal:host-gateway
 
-  groupoffice-64:
-    build:
-      context: ./groupoffice
-      dockerfile: sixsix.Dockerfile
-    restart: always
-    ports:
-      - "6443:443"
-      - "6480:80"
-      - "80:80"
 
-    links:
-      - db
-    volumes:
-      - /Volumes/Projects/docker-groupoffice-development/src/64:/usr/local/share/src:delegated
-      - "godata_64:/var/lib/groupoffice"
-      - "webgrind:/tmp/webgrind"
-      - "goetc_64:/etc/groupoffice/multi_instance"
-      - ./groupoffice/etc/groupoffice/globalconfig.inc.php:/etc/groupoffice/globalconfig.inc.php:delegated
-      - lo_config_volume:/etc/loolwsd
-    env_file:
-      - ./db.env
-    environment:
-      XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
-      MYSQL_DATABASE: groupoffice_64
-      PHP_IDE_CONFIG: "serverName=localhost" #for PHPStorm path mappings in Preferences -> PHP -> Servers
-    working_dir: /usr/local/share/src
-    
-  groupoffice-65:
-    build:
-      context: ./groupoffice
-      dockerfile: sixsix.Dockerfile
-    restart: always
-    ports:
-      - "6543:443"
-      - "6580:80"
-    links:
-      - db
-    volumes:
-      - /Volumes/Projects/docker-groupoffice-development/src/65:/usr/local/share/src:delegated
-      - "godata_65:/var/lib/groupoffice"
-      - "webgrind:/tmp/webgrind"
-      - "goetc_65:/etc/groupoffice/multi_instance"
-      - ./groupoffice/etc/groupoffice/globalconfig.inc.php:/etc/groupoffice/globalconfig.inc.php:delegated
-      - lo_config_volume:/etc/loolwsd
-    env_file:
-      - ./db.env
-    environment:
-      XDEBUG_CONFIG: "profiler_output_dir=/tmp/webgrind"
-      MYSQL_DATABASE: groupoffice_65
-      PHP_IDE_CONFIG: "serverName=localhost" #for PHPStorm path mappings in Preferences -> PHP -> Servers
-    working_dir: /usr/local/share/src
 
   # Discovery URL: http://host.docker.internal:9980
   # On Linux you have to add host.docker.internal to /etc/hosts
@@ -227,13 +179,8 @@ services:
       
 volumes:
   lo_config_volume:
-  godata_65:
-  goetc_65:
 
-  godata_64:
-  goetc_64:
-
-  godata_63:
-  goetc_63:
+  godata_68:
+  goetc_68:
 
   mysqldata:

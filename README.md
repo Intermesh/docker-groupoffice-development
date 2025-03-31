@@ -153,6 +153,11 @@ Upgrade:
 docker compose exec -u www-data groupoffice ./www/cli.php core/System/upgrade
 ```
 
+Watch debug.log file:
+```shell
+docker compose exec groupoffice  tail -f /var/lib/groupoffice/log/debug.log
+```
+
 
 Database access
 ---------------

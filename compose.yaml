@@ -32,7 +32,7 @@ services:
       - host.docker.internal:host-gateway
 
   db:
-    image: mariadb:11.5.2
+    image: mariadb:11.1.2
     restart: always   
     ports:
       - "8306:3306"

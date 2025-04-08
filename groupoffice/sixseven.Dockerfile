@@ -8,7 +8,7 @@ VOLUME /usr/local/share/src
 
 
 # Install small text editor to make config.php changes, install wget for composer, gcc for building xdebug
-RUN apt-get update --allow-releaseinfo-change && apt-get install -y nano wget iproute2 host gcc
+RUN apt-get update --allow-releaseinfo-change && apt-get install -y nano wget gcc
 
 RUN a2enmod expires
 COPY ./etc/apache2/mods-enabled/expires.conf /etc/apache2/mods-enabled/expires.conf

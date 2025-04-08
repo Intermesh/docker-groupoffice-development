@@ -6,9 +6,8 @@ RUN ln -s /usr/local/share/src/www /usr/local/share/groupoffice
 #Group-Office sources
 VOLUME /usr/local/share/src
 
-
 # Install small text editor to make config.php changes, install wget for composer, gcc for building xdebug
-RUN apt-get update --allow-releaseinfo-change && apt-get install -y nano wget iproute2 host gcc npm
+RUN apt-get update --allow-releaseinfo-change && apt-get install -y nano wget gcc npm
 
 RUN a2enmod expires
 COPY ./etc/apache2/mods-enabled/expires.conf /etc/apache2/mods-enabled/expires.conf
@@ -38,6 +37,8 @@ RUN apt purge -y --autoremove wget gcc && rm -rf /var/lib/apt/lists/*
 
 #SASS global
 RUN npm -g install sass
+
+#ENV APACHE_UID=1000
 
 CMD ["apache2-foreground"]
 ENTRYPOINT ["docker-godev-entrypoint-250.sh"]

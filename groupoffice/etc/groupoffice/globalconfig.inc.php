@@ -2,13 +2,15 @@
 
 $config = [
         // GO will connect to this installation to add a mailbox. It is the full url to the Group-Office installation with the postfixadmin module installed.
-        //'serverclient_server_url' => 'http://groupoffice/',
-        // A token to authenticate. The token has to be identical on the web and mail server. By default they are the same server so you can just set anything here.
+//        'serverclient_server_url' => 'http://host.docker.internal:8111/',
 
-        'serverclient_token' => 'someSecureTokenOfyourChoice',
+        // A token to authenticate. The token has to be identical on the web and mail server. By default they are the same server so you can just set anything here.
+//        'serverclient_token' => '677be6c58194956f1c2c49b1b05cb83f8ff2de570bd5a',
 
         // Comma separated list of mailbox domains
-        'serverclient_domains' => 'intermesh.localhost,planetexpress.com',
+//        'serverclient_domains' => 'intermesh.nl',
+
+//				'serverclient_jmap' => true,
 
         // The email account properties that will be added for the user
         'serverclient_mbroot' => '',

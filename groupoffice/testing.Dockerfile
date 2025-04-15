@@ -1,4 +1,4 @@
-FROM intermesh/groupoffice:testing
+FROM de8d505f8b29
 
 RUN rm -rf /usr/local/share/groupoffice
 RUN ln -s /usr/local/share/src/www /usr/local/share/groupoffice
@@ -6,9 +6,8 @@ RUN ln -s /usr/local/share/src/www /usr/local/share/groupoffice
 #Group-Office sources
 VOLUME /usr/local/share/src
 
-
 # Install small text editor to make config.php changes, install wget for composer, gcc for building xdebug
-RUN apt-get update --allow-releaseinfo-change && apt-get install -y nano wget gcc
+RUN apt-get update --allow-releaseinfo-change && apt-get install -y nano wget gcc npm
 
 RUN a2enmod expires
 COPY ./etc/apache2/mods-enabled/expires.conf /etc/apache2/mods-enabled/expires.conf
@@ -25,7 +24,7 @@ RUN /usr/local/sbin/install-composer.sh
 RUN mv composer.phar /usr/local/bin/composer
 
 # For supporting host.docker.internal on Linux. See https://github.com/docker/for-linux/issues/264 (uses pkg iproute2 host)
-COPY docker-godev-entrypoint.sh /usr/local/bin
+COPY docker-godev-entrypoint-250.sh /usr/local/bin
 
 
 #xdebug
@@ -36,6 +35,11 @@ RUN touch /var/log/xdebug.log && chmod 666 /var/log/xdebug.log
 #cleanup
 RUN apt purge -y --autoremove wget gcc && rm -rf /var/lib/apt/lists/*
 
+#SASS global
+RUN npm -g install sass
+
+#ENV APACHE_UID=1000
+
 CMD ["apache2-foreground"]
-ENTRYPOINT ["docker-godev-entrypoint.sh"]
+ENTRYPOINT ["docker-godev-entrypoint-250.sh"]
 

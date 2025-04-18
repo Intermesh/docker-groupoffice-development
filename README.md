@@ -37,7 +37,7 @@ Installation
    docker compose up -d
    ```
    
-   Note: The first time you run it 'composer install' will run. This can take some time to complete. View the logs to see the progress.
+   Note: The first time you run it 'composer install' and 'npm install' will run. This can take some time to complete. View the logs to see the progress.
 
 5. Install Group-Office by going to http://localhost:8080/install/. Note you should not see a page where you enter database connection details. If you see this something is wrong with the database container.
 
@@ -108,6 +108,31 @@ If you'd like to open a shell inside the container then you can run:
 docker compose exec groupoffice bash
 ```
 
+Building Typescript and SASS
+----------------------------
+The git clone only contains the source files and not the compiled css and js. When the container start it will
+run ./scripts/build.sh which compiles all inside the docker container. You can watch all inside the docker container with:
+
+```bash
+docker compose exec groupoffice ./scripts/watch.sh
+```
+
+***Warning***: This uses many resources as it watches all modules. You can also use PHPStorm or another tool to watch them individually.
+
+***Note for Mac users***: The node modules are installed for linux. If you want to compile on a mac you need to reinstall outside
+the container:
+
+Remove all node modules:
+```bash
+docker compose exec groupoffice find www -type d -name "node_modules" -exec rm -rf {} \;
+```
+
+```
+./scripts/install-npm.sh
+```
+
+Now you can run ./scripts/watch.sh (heavy see above) or use PHP storm to start each process sepately.
+
 Translating
 -----------
 Make sure the development tools module is installed.
@@ -132,7 +157,7 @@ Build SASS, GOUI Typescript modules and install composer packages:
 docker compose exec groupoffice ./scripts/build.sh
 ```
 
-Watch SASS and GOUI Typescript modules:
+Watch SASS and GOUI Typescript modules (This uses many resources and is not recommended but very easy to use):
 ```bash
 docker compose exec groupoffice ./scripts/watch.sh
 ```

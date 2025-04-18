@@ -32,7 +32,7 @@ services:
       - host.docker.internal:host-gateway
 
   db:
-    image: mariadb:11.1.2
+    image: mariadb:10.11
     restart: always   
     ports:
       - "8306:3306"
@@ -66,20 +66,14 @@ services:
       - ~/Downloads:/root/Downloads:delegated # Useful for importing email source files
     depends_on:
       - "db"
-#      - "solr"
 
-#  solr:
-#    image: solr
-#    ports:
-#      - "8983:8983"
-
-  sass:
-    restart: always
-    build:
-       context: ./sass
-    volumes:
-      - ./src:/src
-    working_dir: /src
+#  sass:
+#    restart: always
+#    build:
+#       context: ./sass
+#    volumes:
+#      - ./src:/src
+#    working_dir: /src
 
 volumes:
   godata:

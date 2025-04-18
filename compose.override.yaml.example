@@ -8,6 +8,7 @@ services:
       # for profiling set and enable the bind mount above:
       #XDEBUG_MODE: "profile"
 
+  # Example of running another version next to the master branch. Duplicate this and the volumes below to create more versions,
   groupoffice-68:
     build:
       context: ./groupoffice
@@ -26,6 +27,7 @@ services:
     env_file:
       - ./db.env
     environment:
+      MYSQL_USER: root
       MYSQL_DATABASE: groupoffice_68
       PHP_IDE_CONFIG: "serverName=localhost" #for PHPStorm path mappings in Preferences -> PHP -> Servers
 
@@ -73,34 +75,6 @@ services:
       #- JWT_SECRET=s3cr3t
       #- JWT_HEADER=Authorization
       #- JWT_IN_BODY=true
-
-#  phpmyadmin:
-#    image: phpmyadmin/phpmyadmin
-#    restart: always
-#    links:
-#     - db:db
-#    env_file:
-#      - ./db.env
-#    environment:
-#      MYSQL_ROOT_PASSWORD: groupoffice
-#
-#      #Auto login as root
-#      PMA_USER: root
-#      PMA_PASSWORD: groupoffice
-#
-#      # Settings for configuration storage. You must create this database manually. See README.md
-#      PMA_PMADB: phpmyadmin
-#      PMA_CONTROLHOST: db
-#      PMA_CONTROLPORT: 3306
-#      PMA_CONTROLUSER: root
-#      PMA_CONTROLPASS: groupoffice
-#
-#      UPLOAD_LIMIT: 3000000000
-#
-#    ports:
-#     - 8001:80
-
-
 
 #  webgrind:
 #    ports:
@@ -178,9 +152,9 @@ services:
 
       
 volumes:
-  lo_config_volume:
+#  lo_config_volume:
 
   godata_68:
   goetc_68:
 
-  mysqldata:
+#  mysqldata:

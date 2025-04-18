@@ -132,6 +132,11 @@ Build SASS, GOUI Typescript modules and install composer packages:
 docker compose exec groupoffice ./scripts/build.sh
 ```
 
+Watch SASS and GOUI Typescript modules:
+```bash
+docker compose exec groupoffice ./scripts/watch.sh
+```
+
 Run composer:
 ```bash
 docker compose exec -w /usr/local/share/src/www groupoffice composer update -o

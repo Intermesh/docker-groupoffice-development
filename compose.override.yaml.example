@@ -1,6 +1,6 @@
 services:
   groupoffice:
-    ports:
+    ports: !override
       - "80:80"
       - "443:443"
     environment:

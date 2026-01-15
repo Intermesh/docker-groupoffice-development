@@ -9,26 +9,25 @@ services:
       #XDEBUG_MODE: "profile"
 
   # Example of running another version next to the master branch. Duplicate this and the volumes below to create more versions,
-  groupoffice-68:
+  groupoffice-250:
     build:
       context: ./groupoffice
-      dockerfile: sixsix.Dockerfile
+      dockerfile: twentyfivezero.Dockerfile
     restart: always
     ports:
-      - "68:443"
-      - "6880:80"
+      - "8250:80"
     links:
       - db
     volumes:
       - /Volumes/Projects/docker-groupoffice-development/src/63:/usr/local/share/src:delegated
-      - "godata_68:/var/lib/groupoffice"
-      - "goetc_68:/etc/groupoffice/multi_instance"
+      - "godata_250:/var/lib/groupoffice"
+      - "goetc_250:/etc/groupoffice/multi_instance"
       - ./groupoffice/etc/groupoffice/globalconfig.inc.php:/etc/groupoffice/globalconfig.inc.php:delegated
     env_file:
       - ./db.env
     environment:
       MYSQL_USER: root
-      MYSQL_DATABASE: groupoffice_68
+      MYSQL_DATABASE: groupoffice_250
       PHP_IDE_CONFIG: "serverName=localhost" #for PHPStorm path mappings in Preferences -> PHP -> Servers
 
     working_dir: /usr/local/share/src
@@ -154,7 +153,7 @@ services:
 volumes:
 #  lo_config_volume:
 
-  godata_68:
-  goetc_68:
+  godata_250:
+  goetc_250:
 
 #  mysqldata:

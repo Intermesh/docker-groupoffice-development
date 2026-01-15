@@ -1,4 +1,4 @@
-FROM de8d505f8b29
+FROM intermesh/groupoffice:local
 
 RUN rm -rf /usr/local/share/groupoffice
 RUN ln -s /usr/local/share/src/www /usr/local/share/groupoffice

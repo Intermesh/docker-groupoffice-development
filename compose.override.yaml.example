@@ -38,8 +38,8 @@ services:
 
   # Discovery URL: http://host.docker.internal:9980
   # On Linux you have to add host.docker.internal to /etc/hosts
-  libreoffice:
-    image: libreoffice/online:master
+  collabora:
+    image: collabora/code
     environment:
       domain: (.*\.group-office\.com|host\.docker\.internal|.*\.groupoffice\.net|172\.18\.0\.1)
       username: admin

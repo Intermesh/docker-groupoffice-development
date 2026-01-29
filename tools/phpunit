@@ -21,8 +21,8 @@ fi
 #exit 0
 
 
-#echo "Running test in container $CONT"
-#docker compose exec -u www-data $CONT ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml $P
+echo "Running test in container $CONT"
+docker compose exec -u www-data $CONT ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml $P
 
 echo "Running again but with database upgrade"
 docker compose exec -u www-data $CONT ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml --bootstrap="tests/bootstrap-upgrade.php" $P

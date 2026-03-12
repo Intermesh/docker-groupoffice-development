@@ -1,5 +1,8 @@
 services:
   groupoffice:
+    build:
+        context: ./groupoffice
+        dockerfile: testing.Dockerfile
     ports: !override
       - "80:80"
       - "443:443"
@@ -45,11 +48,10 @@ services:
       username: admin
       password: adminadmin
       extra_params: --o:ssl.enable=false
-      DONT_GEN_SSL_CERT: 1
     volumes:
       - lo_config_volume:/etc/loolwsd
     cap_add:
-      - MKNOD
+      - SYS_ADMIN
     ports:
       - "9980:9980"
     restart:

@@ -44,6 +44,7 @@ services:
 
     volumes:
       - dbdata:/var/lib/mysql:delegated
+      - ./db/etc/mysql/mariadb.conf.d/51-groupoffice.cnf:/etc/mysql/mariadb.conf.d/51-groupoffice.cnf
       - ~/Downloads:/root/Downloads:delegated # Useful for importing large dump files
       
   mailserver:

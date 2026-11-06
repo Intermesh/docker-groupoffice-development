@@ -22,7 +22,7 @@ fi
 
 
 echo "Running test in container $CONT"
-docker compose exec -u www-data $CONT ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml $P
+docker compose exec -u www-data $CONT php -d apc.enable_cli=1 ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml $P
 
 echo "Running again but with database upgrade"
 docker compose exec -u www-data $CONT ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml --bootstrap="tests/bootstrap-upgrade.php" $P

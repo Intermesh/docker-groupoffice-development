@@ -1,29 +1,59 @@
 #!/bin/bash
 set -e
 
-if [ -z "$1" ] 
-then
-	CONT="groupoffice"
-else
-	CONT=$1
+usage() {
+	cat <<EOF
+Usage: $0 [-c container] [-m install|upgrade|existing]... [test path]
+
+  -c container  Docker compose service to run in (default: groupoffice)
+  -m mode       Mode to run, may be given multiple times. Runs in given order.
+                  install   Fresh install (bootstrap from tests/phpunit.xml)
+                  upgrade   Database upgrade (tests/bootstrap-upgrade.php)
+                  existing  Existing database, with Xdebug (tests/bootstrap-none.php)
+                Default: -m install
+  test path     Test file or directory (default: tests)
+EOF
+	exit 1
+}
+
+CONT="groupoffice"
+MODES=()
+
+while getopts "c:m:h" opt; do
+	case $opt in
+		c) CONT=$OPTARG ;;
+		m)
+			case $OPTARG in
+				install|upgrade|existing) MODES+=("$OPTARG") ;;
+				*) echo "Invalid mode: $OPTARG" >&2; usage ;;
+			esac
+			;;
+		*) usage ;;
+	esac
+done
+shift $((OPTIND - 1))
+
+P=${1:-tests}
+
+if [ ${#MODES[@]} -eq 0 ]; then
+	MODES=(install)
 fi
 
-if [ -z "$2" ]
-then 
-	P="tests"
-else
-	P=$2
-fi
+PHPUNIT="./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml"
 
-
-#echo "Running on existing database"
-#docker compose exec -e XDEBUG_SESSION=1 -u www-data $CONT ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml --bootstrap="tests/bootstrap-none.php" $P
-#exit 0
-
-
-echo "Running test in container $CONT"
-docker compose exec -u www-data $CONT php -d apc.enable_cli=1 ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml $P
-
-echo "Running again but with database upgrade"
-docker compose exec -u www-data $CONT ./www/vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml --bootstrap="tests/bootstrap-upgrade.php" $P
-
+for MODE in "${MODES[@]}"; do
+	case $MODE in
+		install)
+			echo "Running test in container $CONT with fresh install"
+			docker compose exec -u www-data "$CONT" php -d apc.enable_cli=1 $PHPUNIT "$P"
+			;;
+		upgrade)
+			echo "Running test in container $CONT with database upgrade"
+			docker compose exec -u www-data "$CONT" $PHPUNIT --bootstrap="tests/bootstrap-upgrade.php" "$P"
+			;;
+		existing)
+			echo "Running test in container $CONT on existing database"
+			docker compose exec -e XDEBUG_SESSION=1 -u www-data "$CONT" $PHPUNIT --bootstrap="tests/bootstrap-none.php" "$P"
+			;;
+	esac
+done
